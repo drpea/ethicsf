@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethics High-Yield Reviewer</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf8f3;
+    --warm-white: #fff9f2;
+    --sage: #7a9e7e;
+    --sage-light: #e8f0e9;
+    --sage-dark: #4d7153;
+    --terracotta: #c4714a;
+    --terracotta-light: #f5ece6;
+    --navy: #2c3e50;
+    --gold: #c9a84c;
+    --gold-light: #fdf6e3;
+    --lavender: #7b6fa6;
+    --lavender-light: #ede9f6;
+    --rose: #b5606a;
+    --rose-light: #faeaeb;
+    --teal: #4a8fa8;
+    --teal-light: #e6f2f6;
+    --text: #2a2a2a;
+    --text-muted: #666;
+    --border: #e0d9cc;
+    --shadow: 0 2px 16px rgba(0,0,0,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, var(--sage-dark) 0%, var(--teal) 60%, var(--navy) 100%);
+    color: white;
+    padding: 28px 40px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 3px 20px rgba(0,0,0,0.18);
+  }
+  .site-header .logo { font-size: 2rem; }
+  .site-header h1 {
+    font-family: 'Lora', serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  .site-header p { font-size: 0.82rem; opacity: 0.8; margin-top: 2px; }
+
+  /* ── NAV TABS ── */
+  .nav-scroll {
+    background: white;
+    border-bottom: 2px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: thin;
+    position: sticky; top: 80px; z-index: 90;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 0;
+    white-space: nowrap;
+    padding: 0 16px;
+  }
+  .nav-tab {
+    padding: 12px 18px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .nav-tab:hover { color: var(--sage-dark); background: var(--sage-light); }
+  .nav-tab.active { color: var(--sage-dark); border-bottom-color: var(--sage-dark); font-weight: 600; }
+
+  /* ── SECTIONS ── */
+  .section { display: none; padding: 28px 32px 48px; max-width: 1100px; margin: 0 auto; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: 1.6rem;
+    color: var(--sage-dark);
+    margin-bottom: 4px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-num {
+    background: var(--sage-dark);
+    color: white;
+    font-size: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    padding: 2px 9px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .section-sub { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px; }
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+  /* ── CARDS ── */
+  .card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow);
+  }
+  .card-title {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title .icon { font-size: 1.1rem; }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media (max-width: 700px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); margin: 14px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  thead th {
+    background: var(--navy);
+    color: white;
+    padding: 11px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.3px;
+  }
+  tbody tr:nth-child(even) { background: var(--cream); }
+  tbody tr:hover { background: var(--sage-light); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  td:first-child { font-weight: 600; color: var(--sage-dark); }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin: 2px;
+  }
+  .badge-green { background: var(--sage-light); color: var(--sage-dark); }
+  .badge-red { background: var(--rose-light); color: var(--rose); }
+  .badge-gold { background: var(--gold-light); color: #8a6a1a; }
+  .badge-blue { background: var(--teal-light); color: var(--teal); }
+  .badge-purple { background: var(--lavender-light); color: var(--lavender); }
+  .badge-orange { background: var(--terracotta-light); color: var(--terracotta); }
+
+  /* ── ALERTS ── */
+  .alert {
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    border-left: 4px solid;
+    font-size: 0.89rem;
+  }
+  .alert-key { background: var(--gold-light); border-color: var(--gold); }
+  .alert-warn { background: var(--rose-light); border-color: var(--rose); }
+  .alert-info { background: var(--teal-light); border-color: var(--teal); }
+  .alert-sage { background: var(--sage-light); border-color: var(--sage); }
+  .alert-purple { background: var(--lavender-light); border-color: var(--lavender); }
+  .alert strong { display: block; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; opacity: 0.7; }
+
+  /* ── FLOWCHART ── */
+  .flow-wrap { background: white; border-radius: 12px; border: 1px solid var(--border); padding: 24px; margin: 14px 0; }
+  .flow-title { font-weight: 600; font-size: 0.9rem; color: var(--navy); margin-bottom: 16px; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .flow-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .flow-box {
+    background: var(--sage-light);
+    border: 2px solid var(--sage);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-align: center;
+    min-width: 160px;
+    color: var(--sage-dark);
+    position: relative;
+  }
+  .flow-box.red { background: var(--rose-light); border-color: var(--rose); color: var(--rose); }
+  .flow-box.gold { background: var(--gold-light); border-color: var(--gold); color: #7a5a10; }
+  .flow-box.blue { background: var(--teal-light); border-color: var(--teal); color: var(--teal); }
+  .flow-box.purple { background: var(--lavender-light); border-color: var(--lavender); color: var(--lavender); }
+  .flow-box.navy { background: var(--navy); border-color: var(--navy); color: white; }
+  .flow-box.orange { background: var(--terracotta-light); border-color: var(--terracotta); color: var(--terracotta); }
+  .flow-arrow { font-size: 1.2rem; color: var(--text-muted); margin: 4px 0; }
+  .flow-arrow.right { margin: 0 4px; }
+  .flow-label { font-size: 0.72rem; color: var(--text-muted); font-style: italic; text-align: center; margin: 2px 0; }
+  .flow-diamond {
+    background: var(--gold-light);
+    border: 2px solid var(--gold);
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    text-align: center;
+    min-width: 180px;
+    color: #7a5a10;
+    transform: rotate(0deg);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    padding: 22px 30px;
+  }
+  .flow-yes { color: var(--sage-dark); font-size: 0.75rem; font-weight: 600; }
+  .flow-no { color: var(--rose); font-size: 0.75rem; font-weight: 600; }
+
+  /* ── COMPARISON BOX ── */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+  .compare-side { border-radius: 10px; padding: 16px; }
+  .compare-side h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .compare-side ul { list-style: none; }
+  .compare-side ul li { padding: 4px 0; font-size: 0.88rem; padding-left: 16px; position: relative; }
+  .compare-side ul li::before { content: '→'; position: absolute; left: 0; color: inherit; opacity: 0.6; }
+
+  /* ── LIST STYLES ── */
+  ul.hy { list-style: none; padding: 0; }
+  ul.hy li { padding: 5px 0 5px 20px; position: relative; font-size: 0.9rem; border-bottom: 1px solid var(--border); }
+  ul.hy li:last-child { border-bottom: none; }
+  ul.hy li::before { content: '◆'; position: absolute; left: 0; color: var(--sage); font-size: 0.6rem; top: 9px; }
+
+  ul.check { list-style: none; padding: 0; }
+  ul.check li { padding: 4px 0 4px 24px; position: relative; font-size: 0.89rem; }
+  ul.check li::before { content: '✓'; position: absolute; left: 0; color: var(--sage-dark); font-weight: 700; }
+
+  ul.cross { list-style: none; padding: 0; }
+  ul.cross li { padding: 4px 0 4px 24px; position: relative; font-size: 0.89rem; }
+  ul.cross li::before { content: '✗'; position: absolute; left: 0; color: var(--rose); font-weight: 700; }
+
+  /* ── MCQ SECTION ── */
+  .mcq-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+  }
+  .mcq-q { font-weight: 600; margin-bottom: 14px; font-size: 0.92rem; line-height: 1.6; }
+  .mcq-num { background: var(--navy); color: white; border-radius: 50%; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+  .mcq-options { display: grid; gap: 8px; }
+  .mcq-opt {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: all 0.2s;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .mcq-opt:hover { border-color: var(--sage); background: var(--sage-light); }
+  .mcq-opt.correct { background: #e6f4ea; border-color: #34a853; color: #1a6e30; }
+  .mcq-opt.wrong { background: var(--rose-light); border-color: var(--rose); color: var(--rose); }
+  .mcq-opt .letter { font-weight: 700; min-width: 20px; }
+  .mcq-explain {
+    display: none;
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: var(--gold-light);
+    border-radius: 8px;
+    font-size: 0.87rem;
+    border-left: 3px solid var(--gold);
+    line-height: 1.6;
+  }
+  .mcq-explain.show { display: block; }
+  .mcq-btn {
+    margin-top: 12px;
+    padding: 7px 18px;
+    background: var(--sage-dark);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .mcq-btn:hover { background: var(--navy); }
+
+  /* ── BUZZWORDS ── */
+  .buzz-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .buzz {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.84rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 160px;
+  }
+  .buzz .term { font-weight: 700; color: var(--sage-dark); font-size: 0.82rem; }
+  .buzz .def { color: var(--text-muted); font-size: 0.78rem; }
+
+  /* ── HIGHLIGHT ── */
+  .hl-gold { background: #fff3cd; padding: 1px 5px; border-radius: 3px; font-weight: 600; }
+  .hl-green { background: #d4edda; padding: 1px 5px; border-radius: 3px; font-weight: 600; }
+  .hl-red { background: #f8d7da; padding: 1px 5px; border-radius: 3px; font-weight: 600; }
+
+  /* ── HIERARCHY ── */
+  .hierarchy { display: flex; flex-direction: column; gap: 6px; }
+  .hier-item {
+    display: flex; align-items: center; gap: 12px;
+    background: white; border-radius: 8px; border: 1px solid var(--border);
+    padding: 10px 16px;
+  }
+  .hier-num { background: var(--sage-dark); color: white; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; flex-shrink: 0; }
+  .hier-num.gold { background: var(--gold); }
+  .hier-num.red { background: var(--rose); }
+  .hier-content { flex: 1; }
+  .hier-title { font-weight: 600; font-size: 0.9rem; }
+  .hier-desc { font-size: 0.82rem; color: var(--text-muted); }
+
+  /* ── MINI CARDS ── */
+  .mini-card {
+    border-radius: 10px;
+    padding: 14px 16px;
+    border: 1px solid;
+  }
+  .mini-card h4 { font-size: 0.84rem; font-weight: 700; margin-bottom: 8px; }
+  .mini-card ul { list-style: none; padding: 0; }
+  .mini-card ul li { font-size: 0.84rem; padding: 2px 0 2px 14px; position: relative; }
+  .mini-card ul li::before { content: '·'; position: absolute; left: 4px; font-size: 1.1rem; line-height: 1.2; }
+  .mc-sage { background: var(--sage-light); border-color: var(--sage); color: var(--sage-dark); }
+  .mc-rose { background: var(--rose-light); border-color: #e0a0a0; color: var(--rose); }
+  .mc-gold { background: var(--gold-light); border-color: #d4a830; color: #7a5a10; }
+  .mc-blue { background: var(--teal-light); border-color: var(--teal); color: var(--teal); }
+  .mc-purple { background: var(--lavender-light); border-color: var(--lavender); color: var(--lavender); }
+  .mc-orange { background: var(--terracotta-light); border-color: var(--terracotta); color: var(--terracotta); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-header">
+  <div class="logo">⚕️</div>
+  <div>
+    <h1>Ethics High-Yield Reviewer</h1>
+    <p>Modules 2.01 – 2.08 · A.Y. 2025–2026 · PSY 4</p>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-scroll">
+  <div class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" onclick="showTab(0)">2.01 AI in HC</button>
+    <button class="nav-tab" onclick="showTab(1)">2.02 CEC</button>
+    <button class="nav-tab" onclick="showTab(2)">2.03 Children</button>
+    <button class="nav-tab" onclick="showTab(3)">2.04 Disability</button>
+    <button class="nav-tab" onclick="showTab(4)">2.05 Biopower</button>
+    <button class="nav-tab" onclick="showTab(5)">2.06 ART</button>
+    <button class="nav-tab" onclick="showTab(6)">2.07 Palliative</button>
+    <button class="nav-tab" onclick="showTab(7)">2.08 End-of-Life</button>
+    <button class="nav-tab" onclick="showTab(8)">🧠 MCQ Bank</button>
+    <button class="nav-tab" onclick="showTab(9)">💡 Buzzwords</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION 0: AI IN HEALTHCARE
+     ════════════════════════════════════════════════════════ -->
+<div class="section active" id="tab0">
+  <div class="section-title"><span class="section-num">2.01</span> AI in Diagnostic Medicine</div>
+  <div class="section-sub">Ethical considerations of artificial intelligence in healthcare</div>
+
+  <div class="alert alert-key">
+    <strong>🔑 Core Concept</strong>
+    AI is a <em>double-edged sword</em> — it can improve or worsen healthcare equity. Clinicians must <strong>guide, not blindly follow</strong> AI.
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">⚠️</span> Key Ethical Concerns</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Concern</th><th>Key Points</th></tr></thead>
+          <tbody>
+            <tr><td>Algorithmic Bias</td><td>AI trained on non-representative data amplifies existing inequalities (e.g., pulse oximeters underperform in darker-skinned patients)</td></tr>
+            <tr><td>Transparency</td><td>AI operates in ways that are unclear/not replicable</td></tr>
+            <tr><td>Explainability</td><td>Trade-off: more accurate = less explainable</td></tr>
+            <tr><td>Accountability</td><td>Who is responsible if AI fails? Clinician? Hospital? Developer?</td></tr>
+            <tr><td>Privacy</td><td>AI processes vast sensitive data; breaches erode trust</td></tr>
+            <tr><td>Equity</td><td>AI may widen digital divide or bridge gaps if wisely implemented</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">⚖️</span> Ethical Principles for AI</div>
+      <div class="hierarchy">
+        <div class="hier-item"><div class="hier-num">J</div><div class="hier-content"><div class="hier-title">Justice</div><div class="hier-desc">AI tools must be fairly distributed; prevent further inequities</div></div></div>
+        <div class="hier-item"><div class="hier-num">A</div><div class="hier-content"><div class="hier-title">Autonomy</div><div class="hier-desc">Patients must be informed about AI's role in their care</div></div></div>
+        <div class="hier-item"><div class="hier-num">B</div><div class="hier-content"><div class="hier-title">Beneficence/Non-maleficence</div><div class="hier-desc">AI must yield measurable better outcomes to justify added risk/cost</div></div></div>
+        <div class="hier-item"><div class="hier-num">Ac</div><div class="hier-content"><div class="hier-title">Accountability</div><div class="hier-desc">AI decisions must be explainable; responsibility clearly assigned</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">👨‍⚕️</span> Clinician Roles in Ethical AI Use</div>
+      <ul class="hy">
+        <li><strong>Human Oversight</strong> — AI = assistant; Clinician = authority. Never blindly follow AI output</li>
+        <li><strong>Informed Communication</strong> — Explain AI's role to patients clearly and non-overwhelmingly</li>
+        <li><strong>Accountability</strong> — Remain responsible for outcomes; verify AI against clinical judgment</li>
+        <li><strong>Avoid over-reliance</strong> — Understand AI's limits and weaknesses</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">🔬</span> Algorithmic Bias — Key Facts</div>
+      <ul class="hy">
+        <li>Arises from <strong>non-representative training datasets</strong></li>
+        <li>Biases in medicine <strong>predate AI</strong> — rooted in research/political shortcomings</li>
+        <li>AI <em>echoes and amplifies</em> pre-existing human biases</li>
+        <li>Solution: Diverse, representative datasets; local data generation</li>
+        <li><strong>Philippine dilemma</strong>: Can't use local data without consent → AI trained on Western datasets performs poorly</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🛡️</span> How to Ethically Implement AI</div>
+    <div class="grid-3">
+      <div class="mini-card mc-sage">
+        <h4>Reduce Bias</h4>
+        <ul><li>Use diverse, representative datasets</li><li>Generate prospective, ethically obtained local data</li></ul>
+      </div>
+      <div class="mini-card mc-blue">
+        <h4>Ensure Transparency</h4>
+        <ul><li>AI must be explainable to clinicians + patients</li><li>Balance accuracy vs explainability</li></ul>
+      </div>
+      <div class="mini-card mc-gold">
+        <h4>Protect Privacy</h4>
+        <ul><li>Strong data security measures</li><li>Robust governance for data access/storage</li></ul>
+      </div>
+      <div class="mini-card mc-purple">
+        <h4>Champion Equity</h4>
+        <ul><li>AI must be accessible to all, not only well-funded settings</li><li>Address cost + infrastructure barriers</li></ul>
+      </div>
+      <div class="mini-card mc-orange">
+        <h4>Maintain Oversight</h4>
+        <ul><li>Human must supervise AI outputs</li><li>AI complements, not replaces, clinical judgment</li></ul>
+      </div>
+      <div class="mini-card mc-rose">
+        <h4>Assign Accountability</h4>
+        <ul><li>Clearly delineate: clinician, hospital, developer, insurer, patient responsibility</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-warn">
+    <strong>⚠️ Exam Trap</strong>
+    AI does NOT introduce bias — it <em>amplifies pre-existing</em> biases from medical research. Biases are rooted in human shortcomings that predate AI.
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION 1: CLINICAL ETHICS CAPACITY
+     ════════════════════════════════════════════════════════ -->
+<div class="section" id="tab1">
+  <div class="section-title"><span class="section-num">2.02</span> Clinical Ethics Capacity Development</div>
+  <div class="section-sub">CEC structures across the Asia-Pacific region</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Country</th><th>Key Features</th><th>Challenges</th></tr></thead>
+      <tbody>
+        <tr><td>🇵🇭 Philippines</td><td>Under medical practice group; centralized through CMO office; Clinical Ethics Service Committee (5 physicians); bioethics + transplant ethics handled separately</td><td>Not standardized; educating colleagues about bioethics committee; <strong>NO standardized bioethics committees nationwide</strong></td></tr>
+        <tr><td>🇭🇰 Hong Kong</td><td>43 hospitals in 7 clusters; each cluster has CEC (15-20 members); 50% are practicing doctors; <strong>most decisions made by clinical team</strong></td><td>Very low referral numbers (only 1 out of 7 clusters); limited experience for committee members</td></tr>
+        <tr><td>🇸🇬 Singapore</td><td><strong>Mandatory CEC in every hospital since 2009</strong>; government-funded; 3 lay + 3 internal + 3 external HCPs; CEC chair must be senior MD; audited by MOH; transplant requires unanimous 3/3 approval</td><td>Program enrollment; need for international collaboration</td></tr>
+        <tr><td>🇳🇿 New Zealand</td><td>Ad hoc committees for highly contentious cases only; 1 bioethics center nationally</td><td>Least developed infrastructure; no hands-on clinical ethics training</td></tr>
+        <tr><td>🇦🇺 Australia</td><td>Ad hoc committees only; limited master's programs</td><td>No funding/support from Research Medical Council</td></tr>
+        <tr><td>🇺🇸 USA</td><td>All hospitals have ethics committees; also clinical ethics consultant services; ~40 master's programs; extremely diverse</td><td>No standard process; variability in approach</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-key">
+    <strong>🔑 Philippine CEC Structure (SLMC)</strong>
+    Referrals → CMO Office → Clinical Ethics Service Committee (5 physicians, various subspecialties with Masters in Bioethics) → Meets healthcare team + family → Consensus recommendation → Back to CMO. <strong>Bioethics & medico-legal work together in some cases.</strong>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span> CEC Outcome Domains (Scoping Review)</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Domain</th><th>Focus</th><th>Studies</th></tr></thead>
+          <tbody>
+            <tr><td>1. Quality ⭐ (Most studied)</td><td>Satisfaction, usefulness, timeliness</td><td>31</td></tr>
+            <tr><td>2. Process</td><td>Communication, clarity, consensus-building</td><td>23</td></tr>
+            <tr><td>3. Clinical</td><td>Treatment changes, DNR, goals of care</td><td>19</td></tr>
+            <tr><td>4. Personal</td><td>Moral distress, confidence, knowledge</td><td>12</td></tr>
+            <tr><td>5. Resource (Least studied)</td><td>Length of stay, costs, resource use</td><td>8</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:10px">
+        <strong>Note</strong>
+        Studies found <strong>no clear effect on mortality</strong>. Evidence remains inconsistent.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">🌏</span> Regional Collaboration Priorities</div>
+      <ul class="hy">
+        <li>Clinical ethics issues are often the <strong>same</strong> — only contexts differ</li>
+        <li>Share curriculum, tools, and strategies for ethics education</li>
+        <li>Fellowship/rotating programs across countries</li>
+        <li>Post-COVID: many activities can be done remotely</li>
+        <li><strong>Singapore</strong> offers strongest model for regional learning</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:12px">
+        <strong>⚠️ Philippine Challenge</strong>
+        Major challenge = <em>educating colleagues about what the bioethics committee does</em>. Ideal committee size = <strong>5 members</strong> (balance between expertise and manageability).
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION 2: DECISION MAKING IN CHILDREN
+     ════════════════════════════════════════════════════════ -->
+<div class="section" id="tab2">
+  <div class="section-title"><span class="section-num">2.03</span> Decision Making in Children</div>
+  <div class="section-sub">Surrogate decision-making, Best Interest Standard vs Zone of Parental Discretion</div>
+
+  <div class="alert alert-key">
+    <strong>🔑 Core Distinction: Competence vs Capacity</strong>
+    <strong>Competence</strong> = legal status (determined by courts/law, e.g., age of majority) | <strong>Capacity</strong> = clinical determination by physician at the bedside (task-specific, can change)
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">⬆️</span> Hierarchy of Decision-Making Standards for Incompetent Patients</div>
+    <div class="hierarchy">
+      <div class="hier-item"><div class="hier-num gold" style="background:var(--sage-dark)">1</div><div class="hier-content"><div class="hier-title">Previously Expressed Wishes / Advance Directives</div><div class="hier-desc">Patient's own documented wishes when still competent — highest priority</div></div></div>
+      <div class="hier-item"><div class="hier-num gold">2</div><div class="hier-content"><div class="hier-title">Substituted Judgment</div><div class="hier-desc">Surrogate decides based on what the patient WOULD HAVE wanted, considering past values</div></div></div>
+      <div class="hier-item"><div class="hier-num red">3</div><div class="hier-content"><div class="hier-title">Best Interest Standard (BIS) — Lowest/Last Resort</div><div class="hier-desc">Applied when patient has NEVER been competent; focuses on pain avoidance, well-being, survival</div></div></div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="compare-side mc-blue" style="border-radius:10px; padding:16px; background:var(--teal-light); border:1px solid var(--teal);">
+      <h4 style="color:var(--teal)">Best Interest Standard (BIS)</h4>
+      <ul class="check" style="color:var(--teal)">
+        <li>Seeks OPTIMAL outcome</li>
+        <li>Maximizes child's best interest</li>
+        <li>Justifies overriding parental choices</li>
+        <li>Principle of beneficence</li>
+      </ul>
+      <hr style="margin:8px 0; border-color:var(--teal); opacity:0.3">
+      <p style="font-size:0.82rem; color:var(--teal); font-weight:600">❌ Criticized for:</p>
+      <ul class="cross" style="color:var(--teal)">
+        <li>Vague, ill-defined, inflexible</li>
+        <li>Assumes only ONE best option</li>
+        <li>Neglects family interests</li>
+        <li>Cannot function as limiting principle</li>
+      </ul>
+    </div>
+    <div class="compare-side mc-sage" style="border-radius:10px; padding:16px; background:var(--sage-light); border:1px solid var(--sage);">
+      <h4 style="color:var(--sage-dark)">Zone of Parental Discretion (ZPD) ⭐</h4>
+      <ul class="check" style="color:var(--sage-dark)">
+        <li>Sets a HARM THRESHOLD (not optimal)</li>
+        <li>Tolerates good-enough decisions</li>
+        <li>Respects parental authority</li>
+        <li>Considered superior to BIS by many ethicists</li>
+      </ul>
+      <hr style="margin:8px 0; border-color:var(--sage); opacity:0.3">
+      <p style="font-size:0.82rem; color:var(--sage-dark); font-weight:600">✓ ZPD Ethical Claims:</p>
+      <ul class="check" style="color:var(--sage-dark)">
+        <li>Parental Right to make decisions based on values</li>
+        <li>No Obligation to maximize every benefit</li>
+        <li>Harm Threshold — override ONLY if significant harm</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="flow-wrap">
+    <div class="flow-title">ZPD 2-Stage Test Algorithm</div>
+    <div class="flow">
+      <div class="flow-box navy">Parental decision made</div>
+      <div class="flow-arrow">↓</div>
+      <div style="background:var(--gold-light); border:2px solid var(--gold); border-radius:8px; padding:12px 24px; font-weight:600; color:#7a5a10; font-size:0.88rem; text-align:center; max-width:320px;">
+        STAGE 1: Does carrying out the parental decision cause PROBABLE SIGNIFICANT HARM to the child?
+      </div>
+      <div style="display:flex; gap:48px; margin:8px 0; align-items:flex-start;">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+          <span class="flow-no">↙ NO</span>
+          <div class="flow-box" style="min-width:140px">Tolerate decision<br><small>Accept, don't advocate</small></div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+          <span class="flow-yes">↘ YES</span>
+          <div style="background:var(--rose-light); border:2px solid var(--rose); border-radius:8px; padding:12px 24px; font-weight:600; color:var(--rose); font-size:0.88rem; text-align:center; max-width:260px;">
+            STAGE 2: Does OVERRIDING the decision cause MORE harm than the original decision?
+          </div>
+          <div style="display:flex; gap:24px; margin-top:6px;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <span class="flow-yes" style="font-size:0.72rem">↙ YES</span>
+              <div class="flow-box orange" style="min-width:120px; font-size:0.82rem">Choose lesser harm<br><small>Negotiate, educate</small></div>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <span class="flow-no" style="font-size:0.72rem">↘ NO</span>
+              <div class="flow-box red" style="min-width:120px; font-size:0.82rem">Override parental<br>decision</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">⚖️</span> Gillick Competence</div>
+      <div class="alert alert-sage">
+        <strong>Landmark UK case (1985)</strong>
+        Minors CAN consent to medical treatment if they demonstrate <strong>sufficient maturity and understanding</strong> of the decision. Parental authority diminishes as child's competence increases.
+      </div>
+      <ul class="hy">
+        <li>Clinicians can treat without parental consent if child is Gillick competent</li>
+        <li>Doctor can maintain confidentiality even from parents</li>
+        <li>Fraser Guidelines: assess minor's capacity for contraceptive advice</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">🧩</span> Issues in Pediatric Decision-Making</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Issue</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Competent Irrationality</td><td>Understands risks but makes irrational decisions (e.g., Jehovah's Witness children)</td></tr>
+            <tr><td>Involuntary Altruism</td><td>Procedure done primarily for another's benefit (e.g., sibling organ donation) — ethically questionable</td></tr>
+            <tr><td>Asymmetrical Relationships</td><td>Child's interests inseparable from family; focusing only on child = misplaced individualism</td></tr>
+            <tr><td>Moral Imagination</td><td>Healthcare workers must imagine patient's experience</td></tr>
+            <tr><td>Personal Identity</td><td>Person may have changed their mind given subsequent events</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-warn">
+    <strong>⚠️ Key Exam Points</strong>
+    (1) BIS = LOWEST in hierarchy, used only when patient has NEVER been competent. (2) ZPD focuses on HARM, not optimal outcome. (3) Gillick competence = minor can consent if sufficiently mature. (4) Pediatrician CANNOT forcibly vaccinate — educate first; override only when harm threshold is crossed.
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION 3: SOCIAL JUSTICE / DISABILITY
+     ════════════════════════════════════════════════════════ -->
+<div class="section" id="tab3">
+  <div class="section-title"><span class="section-num">2.04</span> Social Justice: Disability as a Model</div>
+  <div class="section-sub">Models of disability, social justice types, phenomenology of disability</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">⚖️</span> Types of Social Justice</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Definition</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Distributive</td><td>Equitable allocation of resources in society</td><td>Financial assistance for surgeries at social service</td></tr>
+            <tr><td>Retributive/Corrective</td><td>Punishments are fair and just</td><td>Not cutting hand for theft</td></tr>
+            <tr><td>Compensatory</td><td>Proportional compensation for injury</td><td>SSS: higher compensation for stroke vs. miscarriage</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:10px">
+        <strong>Disability & Justice</strong>
+        Disability juxtaposes: (1) <strong>Distributive justice</strong> — allocation concerns, (2) <strong>Relational justice</strong> — limitations and life opportunities
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">🦽</span> Models of Disability</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Model</th><th>Core Idea</th></tr></thead>
+          <tbody>
+            <tr><td>Medical</td><td>Disability = biological abnormality within individual; demands cure; personal tragedy → Aktion T4 is an extreme consequence</td></tr>
+            <tr><td>Social (Shakespeare)</td><td>Disability IMPOSED by society through unnecessary isolation/exclusion; "culturally fabricated narrative"</td></tr>
+            <tr><td>British</td><td>Disability = social injustice; barriers created by society, not impairment itself</td></tr>
+            <tr><td>Nordic</td><td>Disability = mismatch between societal demands and individual abilities; reduce the gap</td></tr>
+            <tr><td>US/Canada</td><td>Disability = minority political issue; rights-based (ADA = parallel to 1964 Civil Rights Act); also cultural identity (Deaf culture)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">💭</span> Toombs: Lived Experience of Disability</div>
+      <div class="alert alert-purple">
+        <strong>Key concept: Phenomenology</strong>
+        Body ≠ mere object. "I exist or live my body." The body is our <em>orientational locus</em> — how we relate to the world around us.
+      </div>
+      <p style="font-size:0.88rem; margin-bottom:8px;"><strong>Loss of Mobility = Lived Body Disruption:</strong></p>
+      <ul class="hy">
+        <li>Change in character of surrounding space</li>
+        <li>Altered awareness/interaction with objects</li>
+        <li>Disruption of corporeal identity</li>
+        <li>Disturbance in relations with others</li>
+        <li>Change in temporal experience</li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:10px">
+        <strong>Shame in Disability</strong>
+        Non-rational response. "Being-for-the-Other" — seeing oneself through others' eyes. Also: frustration of intentionality — "I can no longer do → I must depend on others."
+      </div>
+      <div class="alert alert-sage" style="margin-top:8px">
+        <strong>Temporal Experience</strong>
+        Progressive disability: Physical demands ground one in the <strong>present</strong>. Alternatively, the <strong>future</strong> assumes overriding significance (fear of deterioration).
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">🏥</span> Disability Biases in Healthcare</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Issue</th><th>Bias</th></tr></thead>
+          <tbody>
+            <tr><td>Organ Transplantation</td><td>PWDs denied equal access based solely on disability; families pressured into donation</td></tr>
+            <tr><td>Genetic Testing</td><td>Procreative beneficence debate; impact of testing on PWDs' lives</td></tr>
+            <tr><td>QALYs</td><td>Quality-Adjusted Life Years used by insurers may devalue treatment for PWDs</td></tr>
+            <tr><td>End-of-Life Decisions</td><td>Subjective judgment about whether life is "worth living" influences care decisions</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="margin-top:12px; border-color:var(--rose)">
+        <div class="card-title" style="color:var(--rose)"><span class="icon">⚠️</span> Shakespeare's "Disability Paradox"</div>
+        <p style="font-size:0.88rem">Disabled individuals often report <strong>high quality of life</strong> comparable to non-disabled people — contradicting external assumptions of tragedy. Disability = <em>predicament</em>, not tragedy or pure social construction.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-key">
+    <strong>🔑 Key Distinction: Impairment vs Disability</strong>
+    <strong>Impairment</strong> = bodily/medical condition | <strong>Disability</strong> = social consequences (exclusion, discrimination, lack of accessibility). Bioethics often wrongly medicalizes disability by ignoring social context.
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION 4: BIOPOWER
+     ════════════════════════════════════════════════════════ -->
+<div class="section" id="tab4">
+  <div class="section-title"><span class="section-num">2.05</span> Biopower in Medicine: Control of Reproduction</div>
+  <div class="section-sub">Power, medicalization, and normative views on contraception</div>
+
+  <div class="compare">
+    <div class="compare-side" style="background:var(--teal-light); border:1px solid var(--teal); border-radius:10px; padding:16px;">
+      <h4 style="color:var(--teal)">Naturalist (Biomedical) View</h4>
+      <ul style="list-style:none; padding:0; color:var(--teal)">
+        <li style="padding:3px 0 3px 16px; position:relative; font-size:0.88rem">→ Reproduction = biological process/state</li>
+        <li style="padding:3px 0 3px 16px; position:relative; font-size:0.88rem">→ Value-neutral; descriptive facts</li>
+        <li style="padding:3px 0 3px 16px; position:relative; font-size:0.88rem">→ Physiology, hormones, fertilization</li>
+        <li style="padding:3px 0 3px 16px; position:relative; font-size:0.88rem">→ Championed by biomedical sciences</li>
+        <li style="padding:3px 0 3px 16px; position:relative; font-size:0.88rem">→ Contraception counseling = facts (mechanism, effectiveness, risks)</li>
+      </ul>
+    </div>
+    <div class="compare-side" style="background:var(--lavender-light); border:1px solid var(--lavender); border-radius:10px; padding:16px;">
+      <h4 style="color:var(--lavender)">Normative View</h4>
+      <ul style="list-style:none; padding:0; color:var(--lavender)">
+        <li style="padding:3px 0 3px 16px; position:relative; font-size:0.88rem">→ Reproduction = subjective human experience</li>
+        <li style="padding:3px 0 3px 16px; position:relative; font-size:0.88rem">→ Value-laden; personal/social/cultural/spiritual</li>
+        <li style="padding:3px 0 3px 16px; position:relative; font-size:0.88rem">→ Uses terms: "procreation," "childbearing"</li>
+        <li style="padding:3px 0 3px 16px; position:relative; font-size:0.88rem">→ Championed by feminism, religion</li>
+        <li style="padding:3px 0 3px 16px; position:relative; font-size:0.88rem">→ Moral meaning, responsibility, implications</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">🏛️</span> Power & Biopower (Foucault/Arnason)</div>
+      <div class="alert alert-gold">
+        <strong>Power</strong> = ability to influence others to act<br>
+        <strong>Biopower</strong> = "governance of life" — how medicine/institutions shape what is possible for bodies and lives, <em>often without overt coercion</em>
+      </div>
+      <p style="font-size:0.88rem; margin-bottom:8px;"><strong>Modern power operates by (Arnason):</strong></p>
+      <ul class="hy">
+        <li>Prohibiting</li>
+        <li>Producing norms</li>
+        <li>Managing bodies/lives</li>
+        <li>Regulating populations</li>
+      </ul>
+      <p style="font-size:0.82rem; margin-top:10px; color:var(--text-muted)">Sites: Access & institutional structures | Clinical technologies (e.g., the Pill) | Norms/morality (religious, socio-political)</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">🎗️</span> The Pill: Two Normative Strands</div>
+      <div class="compare" style="margin:0">
+        <div style="background:var(--rose-light); border:1px solid var(--rose); border-radius:8px; padding:12px;">
+          <h4 style="color:var(--rose); font-size:0.85rem; margin-bottom:8px;">Feminist Strand</h4>
+          <p style="font-size:0.82rem; color:var(--rose)">Women must control reproduction to secure autonomy, health, and social equality. BUT: contraception can become a <em>gendered burden</em> — responsibility falls disproportionately on women.</p>
+        </div>
+        <div style="background:var(--lavender-light); border:1px solid var(--lavender); border-radius:8px; padding:12px;">
+          <h4 style="color:var(--lavender); font-size:0.85rem; margin-bottom:8px;">Catholic Strand (Humanae Vitae)</h4>
+          <p style="font-size:0.82rem; color:var(--lavender)">Rejects artificial contraception; proposes Natural Family Planning. Emphasizes moral unity of sexual behavior and reproduction; conjugal love.</p>
+        </div>
+      </div>
+      <div class="alert alert-key" style="margin-top:10px">
+        <strong>Both strands are NORMATIVE</strong> — they shape what is considered "treatable, permissible, and responsible" at individual and population levels.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">💊</span> Medicalization</div>
+    <p style="font-size:0.88rem; margin-bottom:10px;"><strong>Definition:</strong> Process by which a domain of life becomes organized through medical categories, professional authority, and clinical pathways.</p>
+    <div class="grid-2">
+      <div class="mini-card mc-sage">
+        <h4>"GOOD" Forms (Empowering)</h4>
+        <ul><li>Fertility control (pills/IUDs) for self-determination</li><li>Pain management for chronic conditions</li><li>Epilepsy, Alzheimer's as medical conditions</li><li>Supportive relationship counseling</li></ul>
+      </div>
+      <div class="mini-card mc-rose">
+        <h4>"BAD" Forms (Disempowering)</h4>
+        <ul><li>Creating "inauthentic" love with drugs</li><li>Antidepressants to tolerate abusive relationship</li><li>Disease mongering (expanding diagnoses for profit)</li><li>Medicalizing normal female processes</li></ul>
+      </div>
+    </div>
+    <div class="alert alert-info" style="margin-top:10px">
+      <strong>Conscientious Objection</strong>
+      Medical professionals may refuse a valid intervention when personal values conflict. BUT they must: be transparent, offer referral to qualified provider, and NOT abandon the patient.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION 5: ART
+     ════════════════════════════════════════════════════════ -->
+<div class="section" id="tab5">
+  <div class="section-title"><span class="section-num">2.06</span> Ethical Issues in Human Reproduction: ART</div>
+  <div class="section-sub">IVF, surrogacy, designer babies, feminist perspectives on ART</div>
+
+  <div class="alert alert-key">
+    <strong>🔑 Most Important Principle</strong>
+    <strong>Respect for Human Dignity</strong> — most important when dealing with infertile couples and ART. <strong>Parenthood should be desired</strong> before any intervention.
+  </div>
+
+  <div class="grid-3">
+    <div class="mini-card mc-sage">
+      <h4>IVF Key Facts</h4>
+      <ul>
+        <li>Success rate: &lt;25 per 100 women bring child to term</li>
+        <li>Age 40-42: only 10.6% success</li>
+        <li>Under 35: 28.2% success</li>
+        <li>Women = primary targets/burden</li>
+        <li>Not covered by PhilHealth</li>
+      </ul>
+    </div>
+    <div class="mini-card mc-gold">
+      <h4>Fundamental Principles (ART)</h4>
+      <ul>
+        <li>Primacy of patient welfare</li>
+        <li>Patient autonomy (informed shared decision)</li>
+        <li>Social justice (equity regardless of race/gender/SES)</li>
+        <li>Avoid overly optimistic atmosphere — masks failure rates</li>
+      </ul>
+    </div>
+    <div class="mini-card mc-purple">
+      <h4>Gene Dysregulation Risk</h4>
+      <ul>
+        <li>Imprinting phenotypes increased in ART (Silver-Russell, Beckwith-Wiedemann, Angelman)</li>
+        <li>Risk low (&lt;1/5000) but real</li>
+        <li>Epigenetic changes during hormonal stimulation + embryo culture</li>
+        <li>PGD/PGS can screen these</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🤰</span> Gestational Carrier (Surrogacy) — Ethical Issues</div>
+    <div class="grid-2">
+      <div>
+        <p style="font-size:0.88rem; margin-bottom:8px;"><strong>Ethical Questions:</strong></p>
+        <ul class="hy">
+          <li>Altruism vs commodification of reproduction?</li>
+          <li>What if the carrier bonds with the baby?</li>
+          <li>Citizenship of child (cross-border)</li>
+          <li>Financial compensation = almost always involved</li>
+          <li>Truly altruistic arrangements are RARE</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-size:0.88rem; margin-bottom:8px;"><strong>Case: Convenience Surrogacy (CEO Case)</strong></p>
+        <div class="alert alert-warn">
+          Requesting a gestational carrier purely for convenience (not medical necessity) = <strong>commercialization and commodification of reproduction</strong>
+        </div>
+        <div class="alert alert-info" style="margin-top:8px">
+          <strong>Cross-Border Surrogacy</strong>: Most careful evaluation needed for <strong>citizenship and legal parentage of the child</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">🧬</span> Designer Babies / Embryo Screening</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Concept</th><th>Details</th></tr></thead>
+          <tbody>
+            <tr><td>PGS</td><td>Pre-implantation Genetic Screening — screens for chromosomal abnormalities</td></tr>
+            <tr><td>PGD</td><td>Pre-implantation Genetic Diagnosis — diagnoses specific genetic conditions; can be used for sex selection</td></tr>
+            <tr><td>CRISPR</td><td>"Genetic Swiss Army Knife" — cuts/rewrites DNA; rapid and cheap; heritable changes pass to all future generations</td></tr>
+            <tr><td>Ethical Limit</td><td>Screening for medically indicated purposes = OK; selection for NON-medical traits (intelligence, appearance) = <strong>ethically problematic</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">⚡</span> "Fertility is a Feminist Issue" — Key Points</div>
+      <ul class="hy">
+        <li>ART was supposed to liberate women but introduced NEW physical, legal, social burdens</li>
+        <li>Once embryos exist in vitro, woman's "special rights" based on gestation diminished</li>
+        <li>IVF success rate: <strong>fewer than 25/100 women</strong> bring child to term</li>
+        <li>Temilola Akinbolagbe died from OHSS — reminder women bear primary/fatal physical risks</li>
+        <li>"Moral pioneer" burden — women feel they must exhaust every possibility</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:10px">
+        <strong>Key ART Ethics Trap</strong>
+        ART greatest advances have potential to <em>SUPPRESS women's autonomy</em> when mismanaged — not inherently liberating!
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📖</span> Benefit and Harm Framework (Francis, 2015)</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Theory</th><th>Definition of Harm</th></tr></thead>
+        <tbody>
+          <tr><td>Liberal Legal & Political</td><td>"Setback to interests" — includes posthumous harms</td></tr>
+          <tr><td>Comparative Counterfactual</td><td>Person is worse off than they otherwise would have been</td></tr>
+          <tr><td>Deontological</td><td>Violation of rights or autonomy, even if it helps health</td></tr>
+          <tr><td>Bad State Account</td><td>Being in pain/disability/deformity regardless of alternatives</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-info" style="margin-top:10px">
+      <strong>Benatar's Asymmetry</strong>: Presence of harm is bad; absence is good. Presence of benefit is good; <em>absence of benefit is NOT bad</em> (no one exists to miss it). Therefore, it is "better never to have been born."
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION 6: PALLIATIVE CARE & ACP
+     ════════════════════════════════════════════════════════ -->
+<div class="section" id="tab6">
+  <div class="section-title"><span class="section-num">2.07</span> Palliative Care & Advance Care Planning</div>
+  <div class="section-sub">What palliative care really is, ACP core components, good death perspectives</div>
+
+  <div class="alert alert-key">
+    <strong>🔑 Most Common Misconception = Most Tested!</strong>
+    Palliative care is NOT end-of-life care. It is NOT giving up. It is NOT euthanasia. It is NOT limited to dying patients. It CAN be given alongside curative treatment at ANY stage.
+  </div>
+
+  <div class="compare">
+    <div class="compare-side" style="background:var(--sage-light); border:1px solid var(--sage); border-radius:10px; padding:16px;">
+      <h4 style="color:var(--sage-dark)">✅ Palliative Care IS</h4>
+      <ul class="check" style="color:var(--sage-dark)">
+        <li>Interdisciplinary approach</li>
+        <li>Addresses suffering (physical, psychological, social, spiritual)</li>
+        <li>Appropriate at ANY stage of serious illness</li>
+        <li>May occur ALONGSIDE disease-directed treatment</li>
+        <li>NOT defined by prognosis</li>
+        <li>Grounded in beneficence, best interest, proportionality</li>
+      </ul>
+    </div>
+    <div class="compare-side" style="background:var(--rose-light); border:1px solid var(--rose); border-radius:10px; padding:16px;">
+      <h4 style="color:var(--rose)">❌ Palliative Care is NOT</h4>
+      <ul class="cross" style="color:var(--rose)">
+        <li>Hospice (key diff = timing and scope of ethical legitimacy)</li>
+        <li>Giving up or treatment failure</li>
+        <li>Euthanasia or assisted dying</li>
+        <li>Limited to the dying patient</li>
+        <li>Requiring stopping curative treatment</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📋</span> Advance Care Planning (ACP) — Core Components</div>
+    <div class="alert alert-purple">
+      <strong>ACP is NOT a document alone, NOT a single conversation</strong> — it is an ONGOING PROCESS. It begins early when the patient still has full capacity. Ethical foundation = respect for autonomy.
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Component</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>1. Values Clarification</td><td>Clarify which outcomes are acceptable/unacceptable. Ask directly: "Gusto niyo ba ito o ayaw niyo?"</td></tr>
+          <tr><td>2. Goals of Care</td><td>Determine primary goal: life prolongation, functional recovery, OR comfort care only</td></tr>
+          <tr><td>3. Surrogate Decision-Maker</td><td>Identify who will make decisions if patient loses capacity</td></tr>
+          <tr><td>4. Documentation</td><td>Properly document values, goals, and designated surrogate</td></tr>
+          <tr><td>5. Ongoing Communication</td><td>Continue discussions over time as goals and preferences may change</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-warn" style="margin-top:10px">
+      <strong>ACP + Dementia</strong>: Precedent autonomy matters. Best-interest standard when wishes are unknown. Ethical tension between past wishes, present condition, and family preferences is UNAVOIDABLE but clear guidance helps.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🕊️</span> What is a Good Death? — Multiple Perspectives</div>
+    <div class="grid-3">
+      <div class="mini-card mc-blue">
+        <h4>Patient's Perspective</h4>
+        <ul>
+          <li>Free from total pain: Physical, Emotional, Social/Relational, Financial/Economic</li>
+        </ul>
+      </div>
+      <div class="mini-card mc-gold">
+        <h4>Family's Perspective</h4>
+        <ul>
+          <li>No unnecessary pain</li>
+          <li>Everything has been done</li>
+          <li>Home death (increasing favorability)</li>
+          <li>Doctors align family with patient's wishes</li>
+        </ul>
+      </div>
+      <div class="mini-card mc-sage">
+        <h4>Physician's Perspective</h4>
+        <ul>
+          <li>Follow patient's wishes</li>
+          <li>All options exhausted</li>
+          <li>No unnecessary pain</li>
+          <li>Challenge: futility vs family demands</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-sage">
+    <strong>Key Principle: Delayed ACP = Ethical Failure</strong>
+    Most end-of-life conflicts arise from <em>unclear or unknown patient values</em> — NOT from lack of clinical information or resource disagreement. ACP prevents this. Delayed ACP shifts emotional and moral burden to families.
+  </div>
+
+  <div class="flow-wrap">
+    <div class="flow-title">When Conflicts Arise — ACP Framework</div>
+    <div class="flow">
+      <div class="flow-box navy">Conflict at End-of-Life</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row">
+        <div class="flow-box gold">Does patient have decision-making capacity?</div>
+      </div>
+      <div style="display:flex; gap:40px; margin:8px 0; align-items:flex-start; justify-content:center;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <span class="flow-yes">↙ YES</span>
+          <div class="flow-box" style="min-width:140px">Honor patient's wishes (autonomy prevails)</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <span class="flow-no">↘ NO</span>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div class="flow-box gold" style="min-width:160px">Prior advance directive?</div>
+            <div style="display:flex;gap:24px;margin-top:4px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                <span class="flow-yes" style="font-size:0.72rem">YES</span>
+                <div class="flow-box" style="min-width:110px;font-size:0.82rem">Follow directive</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                <span class="flow-no" style="font-size:0.72rem">NO</span>
+                <div class="flow-box gold" style="min-width:110px;font-size:0.82rem">Surrogate → Best Interest</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION 7: END OF LIFE
+     ════════════════════════════════════════════════════════ -->
+<div class="section" id="tab7">
+  <div class="section-title"><span class="section-num">2.08</span> End-of-Life Issues</div>
+  <div class="section-sub">DNR, withdrawing/withholding, medical futility, euthanasia & assisted suicide</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">🧠</span> Definition of End-of-Life</div>
+      <div class="alert alert-warn">
+        <strong>⚠️ Medical vs Lay Definition</strong>
+        <strong>Non-medical persons</strong> → Cardiac death = EOL<br>
+        <strong>Medical persons</strong> → <span class="hl-red">Brain death = EOL</span> (irreversible cessation of ALL functions of entire brain including brainstem, confirmed by clinical exam + apnea testing) — even if mechanical ventilation maintains organ perfusion
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">✨</span> "Good Death" Criteria (U of Minnesota)</div>
+      <ul class="check">
+        <li>Adequate pain and symptom management</li>
+        <li>Avoid prolonged dying</li>
+        <li>Clear communication</li>
+        <li>Adequate preparation (funeral plans, will)</li>
+        <li>Sense of control</li>
+        <li>Sense of completion</li>
+        <li>Patient is unique</li>
+        <li>Strengthening relationships</li>
+        <li>Not being alone</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🔄</span> Competence vs Capacity — Critical Distinction</div>
+    <div class="compare">
+      <div class="compare-side" style="background:var(--teal-light); border:1px solid var(--teal); border-radius:10px; padding:14px;">
+        <h4 style="color:var(--teal)">Capacity (Clinical)</h4>
+        <ul style="list-style:none; padding:0; color:var(--teal); font-size:0.86rem;">
+          <li style="padding:3px 0">→ Determined by physician at bedside</li>
+          <li style="padding:3px 0">→ Task-specific, can change</li>
+          <li style="padding:3px 0">→ Can have capacity WITHOUT verbal ability</li>
+          <li style="padding:3px 0">→ Deafness/mutism does NOT negate capacity</li>
+        </ul>
+      </div>
+      <div class="compare-side" style="background:var(--lavender-light); border:1px solid var(--lavender); border-radius:10px; padding:14px;">
+        <h4 style="color:var(--lavender)">Competence (Legal)</h4>
+        <ul style="list-style:none; padding:0; color:var(--lavender); font-size:0.86rem;">
+          <li style="padding:3px 0">→ Determined by courts/law</li>
+          <li style="padding:3px 0">→ Based on age of majority</li>
+          <li style="padding:3px 0">→ A 16-year-old managing own care = incompetent (legal) WITH capacity (clinical)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🚫</span> DNR Orders — Key Rules</div>
+    <div class="alert alert-warn">
+      <strong>⚠️ #1 Exam Rule</strong>
+      A valid DNR signed by a patient WITH decision-making capacity MUST be honored — <strong>even if family disagrees, even if family is next of kin</strong>. Family cannot override a competent patient's prior directive.
+    </div>
+    <ul class="hy">
+      <li>Unlike movies, CPR rarely leads to good outcomes in reality</li>
+      <li>DNR must be updated upon each admission (circumstances change)</li>
+      <li>Doctors must guide patients in completing DNR forms</li>
+      <li>Voluntary euthanasia: patient clearly consents to intentionally ending life — illegal in PH</li>
+    </ul>
+  </div>
+
+  <div class="flow-wrap">
+    <div class="flow-title">Withdrawing/Withholding Treatment — Decision Algorithm</div>
+    <div class="flow">
+      <div class="flow-box gold">Unknown patient wishes + Life/death emergency</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box navy">TREAT first (Emergency Exception)</div>
+      <div class="flow-label">Applies when: Life/limb-threatening emergency + Time is critical + No decision-maker + Reasonable for any person</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box gold">Patient regains capacity?</div>
+      <div style="display:flex; gap:40px; margin:8px 0; justify-content:center;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <span class="flow-yes">↙ YES</span>
+          <div class="flow-box" style="min-width:160px; text-align:center">Patient's <strong>PRESENT AUTONOMY</strong> prevails over substituted judgment</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <span class="flow-no">↘ NO</span>
+          <div class="flow-box blue" style="min-width:160px; text-align:center">Surrogate decides via substituted judgment or BIS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">💰</span> Medical Futility</div>
+    <div class="alert alert-key">
+      <strong>🔑 "When is enough, enough?"</strong>
+      Medical futility arises when treatment is highly unlikely to provide meaningful benefit. The ethical question is NOT about money — it is "will this treatment meaningfully benefit the patient?"
+    </div>
+    <div class="grid-2">
+      <div class="mini-card mc-sage">
+        <h4>Private Healthcare</h4>
+        <ul>
+          <li>Patient has right to use their money</li>
+          <li>BUT: physicians are NOT obligated to provide non-beneficial treatment even if patient can pay</li>
+        </ul>
+      </div>
+      <div class="mini-card mc-blue">
+        <h4>Socialized Healthcare</h4>
+        <ul>
+          <li>Resources from shared tax pool</li>
+          <li>Distributive justice: is it ethical to spend large resources on one patient when pool could benefit many?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert alert-sage" style="margin-top:10px">
+      <strong>"Tama na. Enough."</strong> Shift toward: comfort care → palliative care → dignified dying → alternative programs aligned with patient goals
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">⚰️</span> Euthanasia vs Assisted Suicide</div>
+    <div class="compare">
+      <div class="compare-side" style="background:var(--rose-light); border:1px solid var(--rose); border-radius:10px; padding:14px;">
+        <h4 style="color:var(--rose)">Euthanasia</h4>
+        <ul style="list-style:none; padding:0; font-size:0.86rem; color:var(--rose)">
+          <li>→ Physician <strong>DIRECTLY PERFORMS</strong> the act causing death</li>
+          <li>→ E.g., lethal injection administered by doctor</li>
+          <li>→ Deliberate act to end life and relieve suffering</li>
+          <li>→ <strong>ILLEGAL in Philippines</strong></li>
+        </ul>
+      </div>
+      <div class="compare-side" style="background:var(--terracotta-light); border:1px solid var(--terracotta); border-radius:10px; padding:14px;">
+        <h4 style="color:var(--terracotta)">Assisted Suicide</h4>
+        <ul style="list-style:none; padding:0; font-size:0.86rem; color:var(--terracotta)">
+          <li>→ Patient <strong>PERFORMS</strong> the act causing death</li>
+          <li>→ Using means provided by physician (e.g., prescribed lethal medication, patient self-administers)</li>
+          <li>→ Patient may lack access/knowledge/physical ability</li>
+        </ul>
+      </div>
+    </div>
+    <div class="table-wrap" style="margin-top:12px">
+      <table>
+        <thead><tr><th>Country/Region</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Belgium, Netherlands (bold = allows in minors)</td><td>Legal (including minors in some)</td></tr>
+          <tr><td>Switzerland (Dignitas)</td><td>Legal — accessible to foreigners</td></tr>
+          <tr><td>Oregon, California, DC, Vermont + 10 more US states</td><td>Physician-Assisted Suicide legal</td></tr>
+          <tr><td>Colombia, Ecuador, Luxembourg</td><td>Legal forms</td></tr>
+          <tr><td><strong>Philippines</strong></td><td><strong>ILLEGAL</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-warn" style="margin-top:10px">
+      <strong>⚠️ Depression & Assisted Suicide</strong>
+      Severely depressed patients requesting assisted suicide → decision-making capacity is QUESTIONABLE. Untreated depression may impair autonomy → capacity must be evaluated FIRST before proceeding.
+    </div>
+  </div>
+
+  <div class="flow-wrap">
+    <div class="flow-title">Septic Arm Case — Substituted Judgment vs Present Autonomy</div>
+    <div class="flow">
+      <div class="flow-row">
+        <div class="flow-box red" style="font-size:0.82rem">Patient delirious → Family refuses amputation (substituted judgment: patient wanted to preserve limbs)</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box gold" style="font-size:0.82rem">Patient regains cognizance → Demonstrates understanding of condition, consequences, and disagreement</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="font-size:0.82rem">Patient has decision-making CAPACITY → PRESENT AUTONOMY PREVAILS</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box navy" style="font-size:0.82rem">"Yes, please take my arm off" → Honor patient's decision</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION 8: MCQ BANK
+     ════════════════════════════════════════════════════════ -->
+<div class="section" id="tab8">
+  <div class="section-title"><span class="section-num">🧠</span> MCQ Review Bank</div>
+  <div class="section-sub">Click an option to check your answer, then reveal the explanation</div>
+
+  <div id="mcqContainer"></div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SECTION 9: BUZZWORDS
+     ════════════════════════════════════════════════════════ -->
+<div class="section" id="tab9">
+  <div class="section-title"><span class="section-num">💡</span> Buzzwords & Quick Reference</div>
+  <div class="section-sub">High-yield terms, mnemonics, and must-know distinctions</div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">⚡</span> Critical Distinctions — Must Know</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Concept A</th><th>vs</th><th>Concept B</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Capacity</strong> = Clinical, determined by physician, task-specific, can change</td><td>≠</td><td><strong>Competence</strong> = Legal, determined by court/law, based on age of majority</td></tr>
+          <tr><td><strong>Euthanasia</strong> = Physician performs the act causing death (lethal injection)</td><td>≠</td><td><strong>Assisted Suicide</strong> = Patient performs the act (using means provided by physician)</td></tr>
+          <tr><td><strong>Palliative Care</strong> = Any stage, alongside curative treatment, based on need</td><td>≠</td><td><strong>Hospice</strong> = Terminal prognosis, usually requires stopping curative treatment</td></tr>
+          <tr><td><strong>BIS</strong> (Best Interest Standard) = Seeks OPTIMAL outcome</td><td>≠</td><td><strong>ZPD</strong> (Zone of Parental Discretion) = Sets HARM THRESHOLD only</td></tr>
+          <tr><td><strong>Brain death</strong> = Medical definition of EOL</td><td>≠</td><td><strong>Cardiac death</strong> = Lay definition (not the medical standard)</td></tr>
+          <tr><td><strong>Withdrawing</strong> = Stopping life-sustaining treatment</td><td>≠</td><td><strong>Withholding</strong> = Not starting life-sustaining treatment</td></tr>
+          <tr><td><strong>Impairment</strong> = Bodily/medical condition</td><td>≠</td><td><strong>Disability</strong> = Social consequences (exclusion, discrimination)</td></tr>
+          <tr><td><strong>ACP</strong> = Ongoing process, NOT a document</td><td>≠</td><td>Single conversation or just legal paperwork</td></tr>
+          <tr><td><strong>Medical model</strong> = Disability in the individual (demands cure)</td><td>≠</td><td><strong>Social model</strong> = Disability imposed by society/environment</td></tr>
+          <tr><td><strong>Algorithmic bias</strong> = AI amplifies pre-existing biases</td><td>≠</td><td>AI introduces new biases from scratch (FALSE)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="icon">🔑</span> "Always" Rules (Exam-Critical)</div>
+      <ul class="check">
+        <li>Valid DNR with capacity → ALWAYS honor (family cannot override)</li>
+        <li>Patient regains capacity → ALWAYS present autonomy prevails over substituted judgment</li>
+        <li>Cannot verbalize/deaf/mute → does NOT mean lack of capacity (communication can occur by other means)</li>
+        <li>Severely depressed requesting AS → ALWAYS assess capacity FIRST</li>
+        <li>Palliative care ≠ giving up → CAN coexist with curative treatment</li>
+        <li>ACP → start EARLY, even while patient has full capacity</li>
+        <li>EOL conflicts → Most often from UNCLEAR PATIENT VALUES, not resource disagreement</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="icon">❌</span> "Never" Rules (Exam-Critical)</div>
+      <ul class="cross">
+        <li>NEVER use cardiac death as medical EOL standard (= brain death)</li>
+        <li>NEVER let family override a valid DNR from competent patient</li>
+        <li>NEVER assume deafness/mutism = lack of capacity</li>
+        <li>NEVER say AI introduces entirely new biases (it echoes existing ones)</li>
+        <li>NEVER equate palliative care with euthanasia/giving up</li>
+        <li>NEVER allow family to override present autonomous patient decision (substituted judgment is inferior)</li>
+        <li>NEVER perform designer baby screening without medically indicated purpose</li>
+        <li>NEVER say BIS = highest standard (it is the LOWEST/last resort)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🗺️</span> Ethical Principles Quick Reference</div>
+    <div class="grid-3">
+      <div class="mini-card mc-sage">
+        <h4>Autonomy</h4>
+        <ul><li>Patient's right to decide own care</li><li>Informed consent</li><li>DNR must be honored</li><li>Capacity-dependent</li></ul>
+      </div>
+      <div class="mini-card mc-blue">
+        <h4>Beneficence</h4>
+        <ul><li>Act in patient's best interest</li><li>Early palliative care</li><li>ACP reduces family burden</li><li>Proportional care</li></ul>
+      </div>
+      <div class="mini-card mc-rose">
+        <h4>Non-Maleficence</h4>
+        <ul><li>"First do no harm"</li><li>Priority in contraception counseling</li><li>Medical futility discussions</li><li>AI bias mitigation</li></ul>
+      </div>
+      <div class="mini-card mc-gold">
+        <h4>Justice</h4>
+        <ul><li>Fair resource allocation</li><li>Equitable AI access</li><li>Disability healthcare equity</li><li>Distributive/Retributive/Compensatory</li></ul>
+      </div>
+      <div class="mini-card mc-purple">
+        <h4>ZPD Ethical Claims</h4>
+        <ul><li>Parental Right (values-based)</li><li>No Obligation (not maximizing)</li><li>Harm Threshold (override if probable harm)</li></ul>
+      </div>
+      <div class="mini-card mc-orange">
+        <h4>ACP Core Components</h4>
+        <ul><li>Values Clarification</li><li>Goals of Care</li><li>Surrogate Decision-Maker</li><li>Documentation</li><li>Ongoing Communication</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🏗️</span> Key Frameworks — Quick Summary</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Framework</th><th>Use When</th><th>Key Rule</th></tr></thead>
+        <tbody>
+          <tr><td>Advance Directive</td><td>Competent patient documented wishes</td><td>Highest priority; always follow</td></tr>
+          <tr><td>Substituted Judgment</td><td>Patient currently incapacitated but had prior values</td><td>What would PATIENT have wanted? (not what family wants)</td></tr>
+          <tr><td>Best Interest Standard</td><td>Patient NEVER competent (pediatrics)</td><td>Lowest hierarchy; focus on pain, well-being, survival</td></tr>
+          <tr><td>ZPD (pediatrics)</td><td>Parental decision vs medical recommendation</td><td>Tolerate unless SIGNIFICANT HARM likely</td></tr>
+          <tr><td>Emergency Exception</td><td>Life/death + no decision-maker + no time</td><td>Treat first; reassess when patient recovers</td></tr>
+          <tr><td>Medical Futility</td><td>Treatment unlikely to benefit meaningfully</td><td>Physicians NOT obligated to provide futile care even if paid</td></tr>
+          <tr><td>Gillick Competence</td><td>Minor (under 18) seeking care without parental consent</td><td>Minor can consent if sufficiently mature and understanding</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🌏</span> Philippine Context — Must Know</div>
+    <div class="grid-2">
+      <div>
+        <ul class="hy">
+          <li>Euthanasia/Assisted Suicide = <strong>ILLEGAL</strong> in Philippines</li>
+          <li>No standardized bioethics committees nationwide</li>
+          <li>IVF not covered by PhilHealth (unlike other countries)</li>
+          <li>Advance directives still NOT mainstream in PH</li>
+          <li>Philippine Universal Health Care (2019): target 95% FIC; current = only 61% (Dec 2024)</li>
+          <li>Organ donation not common; decision must be done in advance</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="hy">
+          <li>Catholic Church influence: euthanasia, divorce, RH Law all highly contested</li>
+          <li>CEC in PH: under medical practice group, reports to CMO</li>
+          <li>Clinical Ethics Service Committee: 5 physicians with Masters in Bioethics</li>
+          <li>Bioethics + research ethics handled by SEPARATE divisions</li>
+          <li>Bioethics = mandatory subject for medical students years 1-3 + electives</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── TAB SWITCHING ──
+function showTab(idx) {
+  document.querySelectorAll('.section').forEach((s,i) => s.classList.toggle('active', i===idx));
+  document.querySelectorAll('.nav-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+  window.scrollTo({top:80, behavior:'smooth'});
+}
+
+// ── MCQ DATA ──
+const mcqs = [
+  {
+    module: "2.08",
+    q: "Which of the following meets the clinical determination of 'end of life,' even if mechanical ventilation continues to maintain organ perfusion?",
+    opts: [
+      "A patient experiencing temporary cessation of circulation and breathing that may still be reversed with advanced life support",
+      "A patient with complete loss of cognitive function who retains independent brainstem reflexes and spontaneous respiration",
+      "A patient who suffered a massive MI resulting in total cessation of spontaneous blood circulation",
+      "A patient with irreversible cessation of all functions of the entire brain, including the brainstem, confirmed by clinical examination and apnea testing"
+    ],
+    correct: 3,
+    explain: "Medically, end-of-life is defined as BRAIN DEATH — irreversible cessation of ALL brain functions including the brainstem, confirmed by clinical exam + apnea testing — even if ventilation maintains organ perfusion. Non-medical persons think cardiac death = EOL, but this is NOT the medical standard."
+  },
+  {
+    module: "2.08",
+    q: "A 16-year-old patient managing their own chronic illness treatment for years is assessed by the team to fully understand risks and benefits of proposed surgery and can communicate a rational choice. How is this patient's status BEST described?",
+    opts: [
+      "Competent with capacity",
+      "Competent without capacity",
+      "Incompetent with capacity",
+      "Incompetent without capacity"
+    ],
+    correct: 2,
+    explain: "CAPACITY = clinical determination by the physician (patient has it — understands, can communicate rationally). COMPETENCE = legal status (patient is a minor = legally INCOMPETENT). Therefore: incompetent (legal) WITH capacity (clinical). The 16-year-old cannot legally consent, but clinically demonstrates decision-making ability."
+  },
+  {
+    module: "2.08",
+    q: "A 72-year-old with advanced heart failure signs a valid DNR after discussing survival rates with her physician. During cardiac arrest, her family insists 'everything must be done.' The MOST ethically appropriate action is:",
+    opts: [
+      "Follow the family's wishes because they are next of kin",
+      "Perform CPR because CPR is standard of care",
+      "Honor the patient's DNR order",
+      "Delay CPR until an ethics committee is consulted"
+    ],
+    correct: 2,
+    explain: "A valid DNR signed by a patient WITH decision-making capacity MUST be honored. Family members CANNOT override a competent patient's prior directive. This reflects the ethical principle of respect for autonomy. Being next of kin does NOT override the patient's documented wishes."
+  },
+  {
+    module: "2.08",
+    q: "A 60-year-old patient with severe sepsis requires emergency amputation. He is initially delirious and his family refuses. Later, he regains consciousness and demonstrates understanding of the situation and consequences. What ethical principle should guide the final decision?",
+    opts: [
+      "Substituted judgment by the family",
+      "Present autonomy of the patient",
+      "Physician beneficence alone",
+      "Hospital policy"
+    ],
+    correct: 1,
+    explain: "Once a patient REGAINS decision-making capacity, their PRESENT AUTONOMY overrides substituted judgment by family members. The family was exercising substituted judgment, which is only valid when the patient lacks capacity. Once capacity is restored, the patient's decision prevails."
+  },
+  {
+    module: "2.08",
+    q: "Which of the following scenarios BEST describes assisted suicide rather than euthanasia?",
+    opts: [
+      "A physician administers a lethal injection that directly causes the patient's death",
+      "A patient with terminal illness refuses life-sustaining treatment and subsequently dies",
+      "A physician prescribes lethal medication, and the patient self-administers it to end their life",
+      "A ventilator is withdrawn at the request of the legal surrogate, leading to death"
+    ],
+    correct: 2,
+    explain: "KEY DISTINCTION: Assisted Suicide = patient PERFORMS the act causing death (self-administers prescribed medication). Euthanasia = physician DIRECTLY performs the act (lethal injection). Option A = euthanasia. Options B and D = withdrawing/withholding treatment, not euthanasia or AS."
+  },
+  {
+    module: "2.07",
+    q: "Which statement BEST defines palliative care?",
+    opts: [
+      "A service initiated only after curative options are exhausted",
+      "Symptom management limited to the terminal phase of illness",
+      "An interdisciplinary approach that addresses suffering across the course of serious illness",
+      "Care that replaces disease-directed treatment in patients with poor prognosis"
+    ],
+    correct: 2,
+    explain: "Palliative care is NOT limited by prognosis or timing. It addresses physical, psychological, social, and spiritual suffering using a team-based approach and CAN be provided alongside curative treatment at ANY stage of serious illness."
+  },
+  {
+    module: "2.07",
+    q: "Conflicts between families and clinicians at end-of-life MOST often arise from:",
+    opts: [
+      "Lack of clinical information",
+      "Disagreement about resource allocation",
+      "Unclear or unknown patient values",
+      "Breach of confidentiality"
+    ],
+    correct: 2,
+    explain: "Most EOL conflicts stem from LACK OF PRIOR COMMUNICATION leading to unclear/unknown patient values — not from lack of clinical info or resource disagreement. This is EXACTLY what ACP tries to prevent. Delayed ACP shifts emotional and moral burden to families."
+  },
+  {
+    module: "2.07",
+    q: "A patient states: 'Ayoko talagang ma-intubate kahit lumala pa ang sakit ko.' This statement MOST directly reflects which core component of ACP?",
+    opts: [
+      "Documentation",
+      "Surrogate designation",
+      "Values clarification",
+      "Goals of care"
+    ],
+    correct: 3,
+    explain: "The patient is clearly identifying an acceptable vs UNACCEPTABLE OUTCOME (intubation = unacceptable regardless of deterioration). This defines their GOALS OF CARE — specifically choosing comfort care over life-prolongation. Values clarification asks about what matters, goals of care translates values into medical preferences."
+  },
+  {
+    module: "2.03",
+    q: "Which of the following is the LOWEST in the hierarchy of decision-making standards for incompetent patients?",
+    opts: [
+      "Previously expressed wishes",
+      "Substituted judgment",
+      "Best Interest Standard",
+      "Harm principle"
+    ],
+    correct: 2,
+    explain: "The hierarchy (highest to lowest): 1. Previously expressed wishes/advance directives, 2. Substituted judgment, 3. Best Interest Standard (BIS). BIS is the LAST RESORT, applied ONLY when the patient has NEVER been competent — no prior values or wishes to guide decisions."
+  },
+  {
+    module: "2.03",
+    q: "The Zone of Parental Discretion (ZPD) allows parents to make decisions as long as:",
+    opts: [
+      "They maximize the child's well-being",
+      "Their choice does not cause probable significant harm",
+      "Their decision aligns with medical recommendations",
+      "Their beliefs are religiously justified"
+    ],
+    correct: 1,
+    explain: "ZPD operates under the HARM PRINCIPLE — parental decisions are ethically acceptable as long as they do NOT cause PROBABLE SIGNIFICANT HARM to the child. ZPD does NOT require parents to maximize benefits (that's BIS). It only requires avoiding harmful choices — a 'good enough' standard."
+  },
+  {
+    module: "2.03",
+    q: "Gillick competence refers to:",
+    opts: [
+      "Parents' authority over a minor's medical treatment",
+      "A minor's ability to consent to medical treatment if sufficiently mature and understanding",
+      "The need for court approval for pediatric treatment",
+      "Physician override of parental refusal"
+    ],
+    correct: 1,
+    explain: "Gillick competence (UK 1985): Minors CAN consent to medical treatment if they demonstrate SUFFICIENT MATURITY and UNDERSTANDING. Parental authority diminishes as child's competence increases. Clinicians can treat Gillick-competent minors without parental consent and maintain confidentiality."
+  },
+  {
+    module: "2.04",
+    q: "A hospital committee deprioritizes patients with cognitive disabilities for organ transplants, assuming their quality of life is lower. Which bioethical concern is MOST directly reflected?",
+    opts: [
+      "Autonomy, because patients with cognitive disability cannot legally consent",
+      "Disability bias, because assumptions about quality of life lead to unequal access",
+      "Beneficence, because physicians must prioritize those with highest survival chances",
+      "Procreative beneficence, because the policy optimizes future population genetics"
+    ],
+    correct: 1,
+    explain: "This is DISABILITY BIAS — negative and inaccurate assumptions about quality of life of PWDs leading to devaluation and unequal treatment. Disability scholars reject the idea that impairment automatically lowers quality of life (the 'disability paradox' — many PWDs report high quality of life)."
+  },
+  {
+    module: "2.04",
+    q: "Which statement BEST reflects the Nordic Model of disability?",
+    opts: [
+      "Disability is caused by biological impairments that require medical correction",
+      "Disability results from culturally fabricated stereotypes imposed by society",
+      "Disability arises from a mismatch between societal expectations and an individual's capabilities",
+      "Disability is a political identity that requires legal activism for equal rights"
+    ],
+    correct: 2,
+    explain: "Nordic Model = disability arises when SOCIETAL DEMANDS do not match the individual's abilities. It focuses on REDUCING THE MISMATCH through accommodations and early support. More collaborative between state, health services, and disabled people than the British model."
+  },
+  {
+    module: "2.05",
+    q: "A 27-year-old woman seeks contraception. The physician strongly recommends a LARC, emphasizing population-level benefits. The patient consents after being told it is the 'standard best option' — no force used. This scenario BEST demonstrates:",
+    opts: [
+      "Overt coercive power through medical authority",
+      "Individual moral paternalism overriding patient autonomy",
+      "Biopower operating through normalization and institutional practice",
+      "Professional power limited to diagnostic categorization"
+    ],
+    correct: 2,
+    explain: "BIOPOWER: Institutional norms and population-level goals subtly shape the patient's bodily choices through 'standard care,' WITHOUT overt coercion. The physician isn't forcing anyone, but institutional norms and the framing of 'standard best option' influence the choice — this is classic Foucauldian biopower."
+  },
+  {
+    module: "2.06",
+    q: "Which of the following practices in ART MOST undermines patient autonomy?",
+    opts: [
+      "Discussing alternative solutions to infertility, such as adoption or voluntary child-free living",
+      "Emphasizing IVF success rates without equal discussion of failure rates and burdens",
+      "Ensuring both partners participate in the decision-making process",
+      "Recognizing infertility as affecting both the couple and their broader social relationships"
+    ],
+    correct: 1,
+    explain: "True patient autonomy requires FULL, FAIR, AND BALANCED disclosure. Overemphasis on success rates while minimizing failure rates and psychosocial costs creates an artificially optimistic atmosphere, which may be MANIPULATIVE rather than supportive — thereby compromising INFORMED CONSENT."
+  },
+  {
+    module: "2.06",
+    q: "The most careful ethical and legal evaluation in cross-border surrogacy, required prior to birth, concerns:",
+    opts: [
+      "Emotional attachment of the intended parents",
+      "Religious approval of IVF",
+      "Citizenship and legal parentage of the child",
+      "Availability of assisted reproductive technology"
+    ],
+    correct: 2,
+    explain: "Cross-border surrogacy creates complex legal and ethical risks specifically regarding NATIONALITY, PARENTAL RIGHTS, and the CHILD'S LEGAL PROTECTION. Citizenship and legal parentage of the child require careful planning before birth."
+  },
+  {
+    module: "2.02",
+    q: "Which outcome domain in Clinical Ethics Consultation is MOST commonly evaluated across studies?",
+    opts: [
+      "Personal outcomes",
+      "Resource outcomes",
+      "Quality outcomes",
+      "Clinical outcomes"
+    ],
+    correct: 2,
+    explain: "QUALITY outcomes (satisfaction, usefulness, timeliness) = MOST commonly evaluated (31 studies). Resource outcomes = LEAST studied (8 studies). The studies also found NO CLEAR EFFECT on mortality."
+  },
+  {
+    module: "2.01",
+    q: "A hospital refuses to share patient data with an AI developer because patients did not consent to its use for AI training. Which ethical concern is the hospital PRIMARILY prioritizing?",
+    opts: [
+      "Autonomy",
+      "Beneficence",
+      "Transparency",
+      "Accountability"
+    ],
+    correct: 0,
+    explain: "The hospital is respecting patient AUTONOMY — ensuring their data is NOT used without INFORMED CONSENT. Patients did not explicitly consent to have their clinical data used for AI development. This is not about transparency (explainability) or accountability (responsibility for outcomes)."
+  },
+  {
+    module: "2.01",
+    q: "Biases in medical knowledge are an emerging problem introduced exclusively by artificial intelligence.",
+    opts: [
+      "True — AI like ChatGPT introduces errors through linguistic prediction",
+      "True — AI independently generates new medical facts",
+      "False — biases in medical knowledge are rooted in shortcomings in medical research and politics that predate AI",
+      "False — biases in medical knowledge are highly overexaggerated"
+    ],
+    correct: 2,
+    explain: "CRITICAL POINT: Bias in medical knowledge DID NOT begin with AI. Its roots come from long-standing issues in medical research — unrepresentative datasets, structural inequalities, political dynamics. AI simply INHERITS and AMPLIFIES these pre-existing human biases."
+  },
+  {
+    module: "2.08",
+    q: "A 45-year-old man with severe, treatment-resistant depression requests physician-assisted suicide in a jurisdiction where it is legal. The MOST appropriate INITIAL consideration is:",
+    opts: [
+      "Respect the patient's autonomy and immediately proceed with assisted suicide",
+      "Determine whether the patient has decision-making capacity, especially considering untreated depression",
+      "Ask the family to decide whether the patient should proceed",
+      "Assume psychological suffering is equivalent to terminal physical illness"
+    ],
+    correct: 1,
+    explain: "Decision-making CAPACITY must be evaluated FIRST. Severe depression may IMPAIR judgment and autonomy, raising concerns about whether consent is truly informed and voluntary. Untreated depression may impair autonomy — a clinician should question the decision of a depressed patient requesting assisted suicide."
+  }
+];
+
+// ── RENDER MCQs ──
+function renderMCQs() {
+  const container = document.getElementById('mcqContainer');
+  mcqs.forEach((q, qi) => {
+    const card = document.createElement('div');
+    card.className = 'mcq-card';
+    card.innerHTML = `
+      <div class="mcq-q">
+        <span class="mcq-num">${qi+1}</span>
+        <span class="badge badge-${['blue','gold','green','purple','orange'][qi%5]}" style="margin-bottom:6px">Module ${q.module}</span><br>
+        ${q.q}
+      </div>
+      <div class="mcq-options" id="opts${qi}">
+        ${q.opts.map((o,oi) => `
+          <div class="mcq-opt" id="opt${qi}_${oi}" onclick="selectOpt(${qi}, ${oi})">
+            <span class="letter">${'ABCD'[oi]}.</span>
+            <span>${o}</span>
+          </div>
+        `).join('')}
+      </div>
+      <button class="mcq-btn" onclick="revealExplain(${qi})">Show Explanation</button>
+      <div class="mcq-explain" id="explain${qi}">
+        <strong>💡 Explanation</strong><br>${q.explain}
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function selectOpt(qi, oi) {
+  const q = mcqs[qi];
+  document.querySelectorAll(`#opts${qi} .mcq-opt`).forEach((el, idx) => {
+    el.onclick = null;
+    if (idx === q.correct) el.classList.add('correct');
+    else if (idx === oi && idx !== q.correct) el.classList.add('wrong');
+  });
+}
+
+function revealExplain(qi) {
+  const el = document.getElementById(`explain${qi}`);
+  el.classList.toggle('show');
+}
+
+renderMCQs();
+</script>
+</body>
+</html>

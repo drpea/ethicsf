@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical Ethics High-Yield Reviewer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FEFAF4;
+    --warm-white: #FDF8F0;
+    --soft-gold: #C9923A;
+    --deep-teal: #1A5F7A;
+    --light-teal: #D6EEF5;
+    --accent-red: #C0392B;
+    --accent-green: #1E7A4D;
+    --light-green: #D5F0E3;
+    --light-red: #FDECEA;
+    --muted-blue: #2C5F8A;
+    --light-blue: #D8EAF5;
+    --warm-gray: #6B6560;
+    --border: #E2D9CE;
+    --card-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    --highlight-yellow: #FFF8DC;
+    --highlight-border: #E8C84A;
+    --purple-light: #F0EBF8;
+    --purple: #6C3F9E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--cream);
+    color: #2C2420;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, var(--deep-teal) 0%, #0E3D52 100%);
+    color: white;
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 20px rgba(0,0,0,0.2);
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3rem;
+  }
+  header p { font-size: 0.9rem; opacity: 0.8; margin-bottom: 1rem; }
+
+  /* ── NAV TABS ── */
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+  }
+  nav button {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  nav button:hover, nav button.active {
+    background: var(--soft-gold);
+    border-color: var(--soft-gold);
+    transform: translateY(-1px);
+  }
+
+  /* ── MAIN LAYOUT ── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--deep-teal);
+    margin-bottom: 0.3rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--soft-gold);
+  }
+  .section-subtitle {
+    color: var(--warm-gray);
+    font-size: 0.88rem;
+    margin-bottom: 1.8rem;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: var(--card-shadow);
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--deep-teal);
+    margin-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .card-title .badge {
+    background: var(--deep-teal);
+    color: white;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.72rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+
+  /* ── HIGHLIGHT BOXES ── */
+  .highlight {
+    background: var(--highlight-yellow);
+    border-left: 4px solid var(--highlight-border);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    margin: 0.8rem 0;
+    font-size: 0.9rem;
+  }
+  .highlight strong { color: #5a4a00; }
+
+  .alert-box {
+    background: var(--light-red);
+    border-left: 4px solid var(--accent-red);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    margin: 0.8rem 0;
+    font-size: 0.9rem;
+  }
+  .success-box {
+    background: var(--light-green);
+    border-left: 4px solid var(--accent-green);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    margin: 0.8rem 0;
+    font-size: 0.9rem;
+  }
+  .info-box {
+    background: var(--light-blue);
+    border-left: 4px solid var(--muted-blue);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    margin: 0.8rem 0;
+    font-size: 0.9rem;
+  }
+  .purple-box {
+    background: var(--purple-light);
+    border-left: 4px solid var(--purple);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    margin: 0.8rem 0;
+    font-size: 0.9rem;
+  }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 0.8rem 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+  }
+  th {
+    background: var(--deep-teal);
+    color: white;
+    padding: 0.7rem 0.9rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.3px;
+  }
+  td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #FAFAF7; }
+  tr:hover td { background: var(--light-teal); transition: background 0.15s; }
+
+  /* ── ALGORITHM / FLOW ── */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0.8rem 0;
+  }
+  .flow-step {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+  .flow-num {
+    background: var(--deep-teal);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .flow-arrow {
+    text-align: center;
+    color: var(--soft-gold);
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  @media (max-width: 700px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  /* ── PILL TAGS ── */
+  .tag {
+    display: inline-block;
+    background: var(--light-teal);
+    color: var(--deep-teal);
+    border-radius: 12px;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin: 0.1rem;
+  }
+  .tag-red { background: var(--light-red); color: var(--accent-red); }
+  .tag-green { background: var(--light-green); color: var(--accent-green); }
+  .tag-gold { background: #FFF0D0; color: #8a5a00; }
+  .tag-purple { background: var(--purple-light); color: var(--purple); }
+
+  /* ── MCQ SECTION ── */
+  .mcq-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+    box-shadow: var(--card-shadow);
+  }
+  .mcq-q {
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: #1a1a1a;
+    font-size: 0.93rem;
+    line-height: 1.6;
+  }
+  .mcq-num {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--deep-teal);
+    color: white;
+    padding: 0.15rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.78rem;
+    margin-right: 0.5rem;
+  }
+  .mcq-options { list-style: none; margin-bottom: 0.8rem; }
+  .mcq-options li {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    margin: 0.25rem 0;
+    cursor: pointer;
+    font-size: 0.88rem;
+    border: 1px solid transparent;
+    transition: all 0.15s;
+  }
+  .mcq-options li:hover { background: var(--light-teal); border-color: var(--deep-teal); }
+  .mcq-options li.correct { background: var(--light-green); border-color: var(--accent-green); font-weight: 600; }
+  .mcq-options li.wrong { background: var(--light-red); border-color: var(--accent-red); }
+  .mcq-options li.reveal-correct { background: var(--light-green); border-color: var(--accent-green); }
+
+  .mcq-explain {
+    display: none;
+    background: var(--highlight-yellow);
+    border-left: 3px solid var(--highlight-border);
+    border-radius: 5px;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.86rem;
+    margin-top: 0.5rem;
+  }
+  .mcq-explain.show { display: block; }
+
+  /* ── BUZZWORDS ── */
+  .buzz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.7rem;
+    margin: 0.8rem 0;
+  }
+  .buzz-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.86rem;
+  }
+  .buzz-term {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--deep-teal);
+    font-size: 0.82rem;
+    margin-bottom: 0.2rem;
+  }
+  .buzz-def { color: #444; }
+
+  /* ── MNEMONIC ── */
+  .mnemonic-box {
+    background: linear-gradient(135deg, #FFF8E7, #FFF0D0);
+    border: 2px solid var(--soft-gold);
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    margin: 1rem 0;
+  }
+  .mnemonic-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #8a5a00;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .mnemonic-letter {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--soft-gold);
+    font-size: 1.05rem;
+    margin-right: 0.4rem;
+  }
+
+  ul.styled { padding-left: 1.2rem; }
+  ul.styled li { margin: 0.3rem 0; font-size: 0.9rem; }
+  ul.styled li::marker { color: var(--soft-gold); }
+
+  .twoCol { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:600px){ .twoCol { grid-template-columns:1fr; } }
+
+  h3.subhead {
+    font-family: 'Playfair Display', serif;
+    color: var(--muted-blue);
+    font-size: 1rem;
+    margin: 1.2rem 0 0.5rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .vs-table th:first-child { background: var(--muted-blue); }
+  .vs-table th:nth-child(2) { background: #2E7D54; }
+  .vs-table th:nth-child(3) { background: #7B3F9E; }
+  .vs-table th:nth-child(4) { background: #B5451B; }
+
+  .score-box {
+    background: var(--deep-teal);
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    display: inline-block;
+    margin: 0.5rem 0;
+  }
+
+  /* progress bar */
+  #progress-bar {
+    height: 3px;
+    background: var(--soft-gold);
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s;
+    z-index: 200;
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar" style="width:0%"></div>
+
+<header>
+  <h1>⚕ Medical Ethics — High-Yield Reviewer</h1>
+  <p>Covers all 8 lecture topics · Exam-ready tables · MCQ practice · Buzzwords</p>
+  <nav>
+    <button class="active" onclick="show('s0',this)">🏠 Overview</button>
+    <button onclick="show('s1',this)">1.01 Moral Reasoning</button>
+    <button onclick="show('s2',this)">1.02 Ethical Theories</button>
+    <button onclick="show('s3',this)">1.03 Research Ethics</button>
+    <button onclick="show('s4',this)">1.04 Autonomy & Agency</button>
+    <button onclick="show('s5',this)">1.05 Autonomy & Consent</button>
+    <button onclick="show('s6',this)">1.06 Truth-Telling</button>
+    <button onclick="show('s7',this)">1.07 Decision Making</button>
+    <button onclick="show('s8',this)">3.01 Commodification</button>
+    <button onclick="show('mcq',this)">📝 MCQ Practice</button>
+    <button onclick="show('buzz',this)">🔑 Buzzwords</button>
+  </nav>
+</header>
+
+<main>
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div id="s0" class="section active">
+  <div class="section-title">🏠 High-Yield Overview Map</div>
+  <div class="section-subtitle">Everything in one glance. Click a tab above to dive deep.</div>
+
+  <div class="highlight">
+    <strong>⭐ MEGA HIGH-YIELD ALGORITHM: Ethical Decision-Making</strong><br>
+    Identify ethical problem → Get facts → Apply ethical theory → Consider stakeholders → Identify conflicts → Find way forward (Kerridge)
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-title">4 Pillars of Bioethics <span class="badge">CORE</span></div>
+      <ul class="styled">
+        <li><strong>Autonomy</strong> — right to self-determination</li>
+        <li><strong>Beneficence</strong> — do good</li>
+        <li><strong>Non-maleficence</strong> — do no harm</li>
+        <li><strong>Justice</strong> — fair distribution</li>
+      </ul>
+      <div class="highlight" style="margin-top:0.6rem;font-size:0.82rem;">🧠 Beauchamp & Childress | Principalism</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Informed Consent Elements <span class="badge">CORE</span></div>
+      <ul class="styled">
+        <li><strong>Competence</strong></li>
+        <li><strong>Disclosure</strong></li>
+        <li><strong>Understanding</strong></li>
+        <li><strong>Voluntariness</strong></li>
+        <li><strong>Consent</strong> (decision)</li>
+      </ul>
+      <div class="info-box" style="font-size:0.82rem;margin-top:0.5rem;">All 5 must be met for autonomous consent</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Surrogate Decision Standard <span class="badge">CORE</span></div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Situation</th><th>Standard</th></tr>
+          <tr><td>Preferences KNOWN</td><td><strong>Substituted Judgment</strong></td></tr>
+          <tr><td>Preferences UNKNOWN</td><td><strong>Best Interest</strong></td></tr>
+        </table>
+      </div>
+      <div class="info-box" style="font-size:0.82rem;margin-top:0.5rem;">Hierarchy: Spouse → Adult children → Parents → Siblings → Physician (unbefriended)</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Key Historical Documents</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Document</th><th>Year</th><th>Key Contribution</th></tr>
+          <tr><td>Nuremberg Code</td><td>1947</td><td>Voluntary consent is <em>absolutely essential</em></td></tr>
+          <tr><td>Declaration of Helsinki</td><td>1964</td><td>Added respect for persons + risk-benefit analysis</td></tr>
+          <tr><td>Belmont Report</td><td>1979</td><td>Respect for persons, Beneficence, Justice</td></tr>
+          <tr><td>Human Tissue Act</td><td>2004</td><td>Consent framework for tissue use; created HTA</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Types of Autonomy (Mackenzie)</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Type</th><th>Key Focus</th><th>Critique</th></tr>
+          <tr><td><strong>Decisional</strong></td><td>Informed, voluntary choice</td><td>Too thin — episodic</td></tr>
+          <tr><td><strong>Conscientious</strong></td><td>Long-term moral agency</td><td>Still individualistic</td></tr>
+          <tr><td><strong>Libertarian</strong></td><td>Freedom from interference</td><td>Ignores power/context</td></tr>
+          <tr><td><strong>Relational</strong></td><td>Socially embedded</td><td>Avoids atomism ✓</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Commodification High-Yield</div>
+      <ul class="styled">
+        <li><strong>3 characteristics</strong>: Has price, fungible, instrumentally valued</li>
+        <li><strong>Instrumentalization</strong>: Using person as means, not end (Kant)</li>
+        <li><strong>Fungibility</strong>: Treating non-fungible thing as interchangeable</li>
+        <li><strong>Valid consent</strong>: Voluntary + Informed + Competent</li>
+        <li><strong>Allocation</strong>: Utility + Urgency + Equity</li>
+        <li><strong>Double veto</strong>: Deceased veto + Family veto</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Ethics is NOT…</div>
+      <div class="mnemonic-box">
+        <div class="mnemonic-title">🔑 Mnemonic: REAL HELPP</div>
+        <div><span class="mnemonic-letter">R</span>eligion &nbsp; <span class="mnemonic-letter">E</span>motion &nbsp; <span class="mnemonic-letter">A</span>uthority &nbsp; <span class="mnemonic-letter">L</span>aw</div>
+        <div><span class="mnemonic-letter">H</span>ospital Policy &nbsp; <span class="mnemonic-letter">E</span>tiquette &nbsp; <span class="mnemonic-letter">L</span>ogic-free Gut</div>
+        <div><span class="mnemonic-letter">P</span>rofessional Etiquette &nbsp; <span class="mnemonic-letter">P</span>ublic Opinion</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 1.01 ═══════════════ -->
+<div id="s1" class="section">
+  <div class="section-title">1.01 Thinking Ethically: Moral Reasoning</div>
+  <div class="section-subtitle">Ethics definition, features, what ethics is not, moral arguments</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">5 Features of Ethics (Kerridge)</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Feature</th><th>Meaning</th></tr>
+          <tr><td><strong>Flourishing & Well-being ⭐</strong></td><td>Improve life for everyone; not just self</td></tr>
+          <tr><td><strong>Prescriptive</strong></td><td>Tells what we <em>should</em> do; imperative language</td></tr>
+          <tr><td><strong>Systematic</strong></td><td>Uses reason; avoids logical fallacies</td></tr>
+          <tr><td><strong>Universalizable</strong></td><td>Applies equitably to all persons</td></tr>
+          <tr><td><strong>Overriding importance</strong></td><td>Above law, policy, personal interest</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">3 Divisions of Ethics</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Division</th><th>Scope</th></tr>
+          <tr><td><strong>Meta-ethics</strong></td><td>Meaning of ethical terms ("right," "good")</td></tr>
+          <tr><td><strong>Normative ethics</strong></td><td>Frameworks & principles to guide behavior</td></tr>
+          <tr><td><strong>Practical ethics</strong></td><td>Applied: bioethics, nursing ethics, etc.</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Structure of a Moral Argument</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-num">1</div><div><strong>Non-moral premise</strong> (factual/descriptive) — e.g., "Trans fat is linked to cardiovascular disease"</div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div><strong>Moral premise</strong> (evaluative) — e.g., "Trans fat is bad for your health"</div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div><strong>Moral conclusion</strong> — e.g., "Trans fat should be banned"</div></div>
+    </div>
+    <div class="highlight">Must have BOTH factual AND evaluative premises to reach a moral conclusion (fact-value gap)</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Common Mistakes in Moral Reasoning</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Fallacy</th><th>Description</th><th>Example</th></tr>
+        <tr><td><strong>Begging the Question</strong></td><td>Assuming what must be proved</td><td>"Cells can't be a person" (assumes size = personhood)</td></tr>
+        <tr><td><strong>Ad Hominem</strong></td><td>Attack the person, not the argument</td><td>Calling someone a "baby-killer" instead of addressing their argument</td></tr>
+        <tr><td><strong>Reductio Ad Absurdum</strong></td><td>Shows argument leads to absurd conclusion</td><td>"If animals are persons, we'd baptize embryos"</td></tr>
+        <tr><td><strong>Fact-Value Gap</strong></td><td>Moral conclusion from only factual premises</td><td>Ignoring moral assumptions when discussing contraception</td></tr>
+        <tr><td><strong>Non Sequitur</strong></td><td>Conclusion doesn't follow from premises</td><td>"I'm a med student → therefore I will be a doctor"</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Kerridge's Ethical Problem-Solving Framework ⭐</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-num">1</div><div><strong>Identify the ethical problem</strong> — define & do initial conceptual analysis</div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div><strong>Get the facts</strong> — listen to stakeholders; work out what you need to know</div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div><strong>Consider ethical concepts/theories</strong> — identify & critically analyze</div></div>
+      <div class="flow-step"><div class="flow-num">4</div><div><strong>Think from other perspectives</strong> — stakeholders, other theories, precedents</div></div>
+      <div class="flow-step"><div class="flow-num">5</div><div><strong>Identify ethical conflicts</strong> — conflicts between principles; how to resolve</div></div>
+      <div class="flow-step"><div class="flow-num">6</div><div><strong>Consider legal aspects</strong></div></div>
+      <div class="flow-step"><div class="flow-num">7</div><div><strong>Identify a way forward</strong> — pick option, justify, communicate, document, evaluate</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Mill's Harm Principle — Delimiting Moral Issues</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Domain</th><th>Definition</th><th>Example</th></tr>
+        <tr><td><strong>Personal Life</strong></td><td>Private actions affecting no one else</td><td>Personal dietary choices</td></tr>
+        <tr><td><strong>Morality</strong></td><td>Actions affecting other people</td><td>Lying, promise-breaking</td></tr>
+        <tr><td><strong>Public Policy</strong></td><td>Actions affecting others — discouraged or encouraged</td><td>Tobacco taxes; adoption incentives</td></tr>
+        <tr><td><strong>Legality</strong></td><td>Actions forbidden or encouraged by law</td><td>Fines for littering; penalties for drunk driving</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 1.02 ═══════════════ -->
+<div id="s2" class="section">
+  <div class="section-title">1.02 Ethical Theories & Their Applications</div>
+  <div class="section-subtitle">Consequentialism, Deontology, Virtue Ethics + Alternative theories</div>
+
+  <div class="card">
+    <div class="card-title">3 Dominant Ethical Theories — Master Table ⭐</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Theory</th><th>Core Question</th><th>Key Philosopher</th><th>Focus</th><th>Medical Example</th></tr>
+        <tr>
+          <td><strong>Consequentialism / Utilitarianism</strong></td>
+          <td>"What outcome results?"</td>
+          <td>Bentham (Act), Mill (Rule)</td>
+          <td>Outcomes; greatest good for greatest number</td>
+          <td>Triage; resource allocation; prioritizing younger patients for transplant</td>
+        </tr>
+        <tr>
+          <td><strong>Deontology</strong></td>
+          <td>"What is my duty?"</td>
+          <td>Immanuel Kant</td>
+          <td>Rules, rights, duties; consequences irrelevant</td>
+          <td>Respecting patient refusal regardless of outcome; informed consent</td>
+        </tr>
+        <tr>
+          <td><strong>Virtue Ethics</strong></td>
+          <td>"What would a good person do?"</td>
+          <td>Aristotle</td>
+          <td>Character, motivation, Eudaimonia</td>
+          <td>A good physician embodies compassion, honesty, skill</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Utilitarianism: Bentham vs Mill</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th></th><th>Bentham</th><th>Mill</th></tr>
+          <tr><td>Type</td><td>Act Utilitarian</td><td>Rule Utilitarian</td></tr>
+          <tr><td>Focus</td><td>Quantity of pleasure</td><td>Quality + quantity of happiness</td></tr>
+          <tr><td>Principle</td><td>Principle of Utility</td><td>Greatest Happiness Principle</td></tr>
+          <tr><td>Good</td><td>= Pleasure</td><td>Higher (intellectual) pleasures</td></tr>
+          <tr><td>Evil</td><td>= Pain</td><td>Pain + privation of pleasure</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Kant's Categorical Imperative</div>
+      <ul class="styled">
+        <li>Act only on rules everyone can universally agree to</li>
+        <li><strong>Treat people as an END, NEVER merely as means</strong></li>
+        <li>Make laws that allow people to make their own choices</li>
+      </ul>
+      <div class="highlight">
+        <strong>Key quote:</strong> "Act so that you treat humanity, whether in your own person or that of another, always as an end and never as a means only."
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Alternative Ethical Theories ⭐</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Theory</th><th>Key Idea</th><th>Comparison</th><th>Criticism</th></tr>
+        <tr>
+          <td><strong>Casuistry</strong></td>
+          <td>Case-based; compare to precedent cases</td>
+          <td>Similar to deontology (generalizes rules) BUT rules from empirical observation, not pure reason</td>
+          <td>Can lead to moral relativism; not a coherent theory</td>
+        </tr>
+        <tr>
+          <td><strong>Ethics of Care</strong></td>
+          <td>Relationships > principles; feminist origin (Carol Gilligan); rejects "male" voice</td>
+          <td>Branch of virtue ethics; prevalent in nursing ethics</td>
+          <td>Not fully action-guiding; incomplete for strangers</td>
+        </tr>
+        <tr>
+          <td><strong>Principalism</strong></td>
+          <td>Apply 4 principles (Beauchamp & Childress); Autonomy, Beneficence, Non-maleficence, Justice</td>
+          <td>Opposite of casuistry (starts from principles)</td>
+          <td>Doesn't tell us how to rank competing principles</td>
+        </tr>
+        <tr>
+          <td><strong>Feminist Ethics</strong></td>
+          <td>Whose voices are silenced? Power imbalances; social structures</td>
+          <td>Overlaps care ethics + critique of hierarchy/oppression</td>
+          <td>—</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Virtue Ethics in Medicine</div>
+    <div class="grid-2">
+      <div>
+        <div class="success-box">
+          <strong>Good physician virtues:</strong><br>
+          Compassion · Knowledge of healing · Human relation skills
+        </div>
+        <ul class="styled">
+          <li><strong>Eudaimonia</strong> = human flourishing; highest goal</li>
+          <li>Right action = what a virtuous person would do</li>
+          <li><strong>Doctrine of the Mean</strong>: virtue is balance between extremes (e.g., courage = between cowardice and recklessness)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Moral Virtues</th><th>Intellectual Virtues</th></tr>
+            <tr><td>Character & attitudes (courage, patience)</td><td>Thought & reason</td></tr>
+          </table>
+        </div>
+        <div class="alert-box" style="margin-top:0.5rem;">
+          <strong>Criticism:</strong> Circular reasoning — "virtue = how a virtuous person acts"
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Assessing Ethical Theories — 5 Criteria</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-num">1</div><div><strong>Internally consistent</strong> — Does it avoid contradicting itself?</div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div><strong>Logical arguments</strong> — Are premises true, yielding true conclusions?</div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div><strong>Consistent with common morality</strong> — Does it align with what we think is right?</div></div>
+      <div class="flow-step"><div class="flow-num">4</div><div><strong>Face validity</strong> — Does it explain the moral world at first glance?</div></div>
+      <div class="flow-step"><div class="flow-num">5</div><div><strong>Utility</strong> — Does it give practical guidance?</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 1.03 ═══════════════ -->
+<div id="s3" class="section">
+  <div class="section-title">1.03 History of Ethical Issues in Human Research</div>
+  <div class="section-subtitle">Key documents, Nazi experiments, Tuskegee, Belmont Report</div>
+
+  <div class="card">
+    <div class="card-title">Timeline of Key Events ⭐</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Year</th><th>Event</th><th>Ethical Significance</th></tr>
+        <tr><td>1883</td><td>Galton coins "Eugenics"</td><td>Origin of racial hygiene movements</td></tr>
+        <tr><td>1933</td><td>Hereditary Health Law (Nazi Germany)</td><td>Mandatory sterilization for 9 disabilities → 400,000 sterilized</td></tr>
+        <tr><td>1935</td><td>Marital Hygiene Law</td><td>Prohibited "undesirable" genetic marriages; master race ideology</td></tr>
+        <tr><td>1932–72</td><td>Tuskegee Syphilis Study</td><td>African American men denied treatment despite penicillin availability; racial discrimination in healthcare</td></tr>
+        <tr><td>1947</td><td><strong>Nuremberg Code</strong></td><td>Voluntary consent is <em>absolutely essential</em>; first ethics code</td></tr>
+        <tr><td>1948</td><td>Universal Declaration of Human Rights + Geneva Declaration</td><td>Modernized Hippocratic Oath; treat without prejudice</td></tr>
+        <tr><td>1964</td><td><strong>Declaration of Helsinki</strong></td><td>Added: respect for individuals, informed consent, risk-benefit analysis</td></tr>
+        <tr><td>1979</td><td><strong>Belmont Report</strong></td><td>3 principles: Respect for persons, Beneficence, Justice; basis for Common Rule + IRBs</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">10 Nuremberg Code Principles (Summary)</div>
+      <ol style="padding-left:1.2rem;font-size:0.88rem;">
+        <li>Voluntary consent is <strong>absolutely essential</strong></li>
+        <li>Must yield fruitful results for society; not random/unnecessary</li>
+        <li>Based on prior animal experiments</li>
+        <li>Avoid all unnecessary physical/mental suffering</li>
+        <li>No experiment if death/disabling injury expected (except when researchers are also subjects)</li>
+        <li>Risk must not exceed humanitarian importance</li>
+        <li>Adequate facilities to protect subjects</li>
+        <li>Only scientifically qualified persons</li>
+        <li>Subject has liberty to end experiment at any time</li>
+        <li>Scientist must be prepared to terminate experiment</li>
+      </ol>
+    </div>
+    <div class="card">
+      <div class="card-title">Belmont Report — 3 Core Principles</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Principle</th><th>Key Idea</th></tr>
+          <tr><td><strong>Respect for Persons</strong></td><td>Acknowledge autonomy; protect those with diminished autonomy</td></tr>
+          <tr><td><strong>Beneficence</strong></td><td>Maximize benefits, minimize harm</td></tr>
+          <tr><td><strong>Justice</strong></td><td>Fair distribution of research benefits and burdens</td></tr>
+        </table>
+      </div>
+      <div class="info-box" style="margin-top:0.5rem;">→ Basis for the <strong>Common Rule</strong> and establishment of <strong>IRBs</strong></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Tuskegee Syphilis Study — High-Yield Facts</div>
+    <div class="grid-2">
+      <ul class="styled">
+        <li>Duration: <strong>40 years</strong> (1932–1972)</li>
+        <li>Population: African American men with syphilis</li>
+        <li>Deliberate <strong>withholding of treatment</strong> (penicillin became available but was not given)</li>
+        <li>Purpose: study disease progression</li>
+      </ul>
+      <ul class="styled">
+        <li>Emblematic of <strong>racial discrimination</strong> in healthcare</li>
+        <li>Created lasting <strong>mistrust</strong> of medical institutions in African Americans</li>
+        <li>Led to public outrage → reforms in informed consent + ethical oversight</li>
+        <li>Triggered creation of Belmont Report</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Contemporary Ethical Issues in Research</div>
+    <div class="buzz-grid">
+      <div class="buzz-item"><div class="buzz-term">Informed Consent</div><div class="buzz-def">Expanded; includes explicit right to withdraw at any time</div></div>
+      <div class="buzz-item"><div class="buzz-term">Vulnerable Populations</div><div class="buzz-def">Children, prisoners, economically disadvantaged</div></div>
+      <div class="buzz-item"><div class="buzz-term">Cultural Sensitivity</div><div class="buzz-def">Local customs must be respected in diverse populations</div></div>
+      <div class="buzz-item"><div class="buzz-term">Reproducibility Crisis</div><div class="buzz-def">Replication of studies to confirm findings</div></div>
+      <div class="buzz-item"><div class="buzz-term">Data Privacy & AI</div><div class="buzz-def">Consent for data use; ethics of AI in research</div></div>
+      <div class="buzz-item"><div class="buzz-term">Global Health</div><div class="buzz-def">Equity in low-resource settings; WHO/CIOMS guidelines</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 1.04 ═══════════════ -->
+<div id="s4" class="section">
+  <div class="section-title">1.04 Autonomy & Agency</div>
+  <div class="section-subtitle">4 types of autonomy with guiding questions, relational autonomy, clinical applications</div>
+
+  <div class="card">
+    <div class="card-title">4 Types of Autonomy — Master Comparison ⭐</div>
+    <div class="table-wrap">
+      <table class="vs-table">
+        <tr><th>Feature</th><th>Decisional</th><th>Conscientious</th><th>Libertarian</th><th style="background:#1E5F3A">Relational</th></tr>
+        <tr><td><strong>Core Focus</strong></td><td>Informed, voluntary choice at a point in time</td><td>Long-term moral agency; values over time</td><td>Freedom from external interference</td><td>Autonomy through relationships & social context</td></tr>
+        <tr><td><strong>Guiding Question</strong></td><td>Is patient informed, competent, and voluntary?</td><td>Is decision consistent with values over time?</td><td>Is decision free from interference?</td><td>How do relationships shape/constrain the decision?</td></tr>
+        <tr><td><strong>Philosopher</strong></td><td>Beauchamp & Childress</td><td>Rebecca Kukla</td><td>John Stuart Mill</td><td>Feminist theory</td></tr>
+        <tr><td><strong>Clinical Use</strong></td><td>Informed consent</td><td>Chronic illness; long-term care</td><td>Organ sales; personal liberty</td><td>Family dynamics; cultural context; disability</td></tr>
+        <tr><td><strong>Critique</strong></td><td>Too thin; ignores identity</td><td>Still individualistic</td><td>Ignores power & inequality</td><td>Most robust; avoids atomism ✓</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Relational Autonomy — Key Features</div>
+    <div class="grid-2">
+      <div>
+        <ul class="styled">
+          <li>Self is <strong>socially embedded</strong>, not atomistic</li>
+          <li>Autonomy depends on <strong>relational competencies</strong>: emotional awareness, imaginative capacity, recognition by others, understanding</li>
+          <li>Requires supportive conditions: <strong>trust + respect</strong></li>
+          <li>"Man does not live alone; he lives in relation to someone else always"</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <strong>Asian Context:</strong><br>
+        Individual is a "smaller self within a larger self"<br>
+        Family sovereignty &gt; Self-sovereignty<br>
+        Familial autonomy &gt; Individual autonomy<br>
+        Collective responsibility is the norm
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Applying Autonomy Types to a Refusal (Algorithm)</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-num">D</div><div><strong>Decisional:</strong> Is the patient competent, informed, and voluntary? → If YES, respect refusal</div></div>
+      <div class="flow-step"><div class="flow-num">C</div><div><strong>Conscientious:</strong> Does refusal align with long-term values & commitments? → Respect ongoing moral agency</div></div>
+      <div class="flow-step"><div class="flow-num">L</div><div><strong>Libertarian:</strong> Is refusal free from interference? → Refusal is absolute right (as long as no harm to others)</div></div>
+      <div class="flow-step"><div class="flow-num">R</div><div><strong>Relational:</strong> Assess social context, barriers, support systems → Address structural factors; enable informed choice</div></div>
+    </div>
+    <div class="highlight">
+      ⭐ <strong>KEY:</strong> Different autonomy models → different ethical responses to the same case
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Decisional Autonomy Criteria (Christman)</div>
+      <ul class="styled">
+        <li><strong>Intentional</strong> action</li>
+        <li><strong>Competent</strong> — ability to understand</li>
+        <li><strong>Voluntary</strong> — no coercion or manipulation</li>
+        <li>Person would accept decision upon sustained reflection without resistance/alienation</li>
+      </ul>
+      <div class="alert-box">Focuses on <strong>local</strong> (everyday decisions), not global (life as a whole) autonomy</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Libertarian Autonomy Core Principles</div>
+      <ul class="styled">
+        <li><strong>Non-threat</strong> — as long as you don't harm others</li>
+        <li><strong>Freedom of choice</strong></li>
+        <li><strong>Sovereignty of body</strong> — "my body, my rules"</li>
+      </ul>
+      <div class="alert-box"><strong>Criticism:</strong> Ignores structural inequality & power. Assumes more choices = more freedom. Doesn't ask if choices are authentic or coerced.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 1.05 ═══════════════ -->
+<div id="s5" class="section">
+  <div class="section-title">1.05 Autonomy & Informed Consent</div>
+  <div class="section-subtitle">Western vs Asian bioethics, types of consent, elements, exceptions</div>
+
+  <div class="card">
+    <div class="card-title">Western vs Asian Bioethics Comparison ⭐</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Area</th><th>Western/Default</th><th>Asian Context</th></tr>
+        <tr><td><strong>Breaking Bad News</strong></td><td>Patient informed first; decides on disclosure</td><td>Family may decide when/how to disclose to protect patient</td></tr>
+        <tr><td><strong>Giving Consent</strong></td><td>Patient gives informed, voluntary consent</td><td>Family involvement often required; spousal consent may be needed</td></tr>
+        <tr><td><strong>Best Interests</strong></td><td>Patient's interests prioritized if competent</td><td>Family/community interests may override individual needs</td></tr>
+        <tr><td><strong>End-of-Life Care</strong></td><td>Competent patient decides for themselves</td><td>Family and religious values guide decisions; consequentialization needed</td></tr>
+        <tr><td><strong>Autonomy type</strong></td><td>Individual autonomy dominant</td><td>Familial/relational autonomy dominant</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Elements of Valid Informed Consent ⭐</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Category</th><th>Element</th><th>Definition</th></tr>
+        <tr><td rowspan="2" style="background:#D6EEF5;font-weight:700;color:#1A5F7A">ENABLE</td><td><strong>Competence</strong></td><td>Ability to understand and decide based on personal values (legal term: "declared by courts")</td></tr>
+        <tr><td><strong>Voluntariness</strong></td><td>Exercise choice free from undue manipulation or coercion</td></tr>
+        <tr><td rowspan="2" style="background:#D5F0E3;font-weight:700;color:#1E7A4D">INFORM</td><td><strong>Disclosure</strong></td><td>Adequate information provided; moral justification = respect for autonomy</td></tr>
+        <tr><td><strong>Understanding</strong></td><td>Patient comprehends info; context, content, mode, capacity all matter</td></tr>
+        <tr><td style="background:#FFF0D0;font-weight:700;color:#8a5a00">ENACT</td><td><strong>Decision & authority</strong></td><td>Clear intentional agreement/refusal; two-way process; right to accept or refuse</td></tr>
+      </table>
+    </div>
+    <div class="highlight">⭐ All 5 elements must be satisfied for a decision to be fully autonomous (Beauchamp & Childress)</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Types of Consent</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Type</th><th>Description</th><th>Example</th></tr>
+          <tr><td><strong>Explicit</strong></td><td>Clearly stated, oral or written</td><td>"Are you okay with recording this?"</td></tr>
+          <tr><td><strong>Implied</strong></td><td>Willingness indicated by behavior; not coerced</td><td>Coming to a clinic and being examined</td></tr>
+          <tr><td><strong>Tacit</strong></td><td>Failure to indicate dissent</td><td>Not objecting when examination begins</td></tr>
+          <tr><td><strong>Presumed</strong></td><td>What patient would do if able to consent</td><td>Emergency resuscitation</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Exceptions to Consent</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Exception</th><th>Key Point</th></tr>
+          <tr><td><strong>Emergency</strong></td><td>ER team obliged to act unless valid advance directive exists</td></tr>
+          <tr><td><strong>Necessity</strong></td><td>Intervention immediately required</td></tr>
+          <tr><td><strong>Limits to consent</strong></td><td>Cannot consent to assisted suicide (= murder in PH law)</td></tr>
+          <tr><td><strong>Vulnerable populations</strong></td><td>Children (presumed incompetent), elderly, pregnant, mental health issues</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Autonomous vs Effective Consent</div>
+    <div class="grid-2">
+      <div class="success-box">
+        <strong>Autonomously Authorized Consent:</strong><br>
+        Fully deliberate, informed, and voluntary decision by a competent individual
+      </div>
+      <div class="alert-box">
+        <strong>Effective Consent:</strong><br>
+        Legally valid (e.g., signed form) but may lack true understanding or voluntariness<br>
+        <em>Can sign a form without making an autonomous choice!</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 1.06 ═══════════════ -->
+<div id="s6" class="section">
+  <div class="section-title">1.06 Truth-Telling in Medicine</div>
+  <div class="section-subtitle">Theoretical justifications, SPIKES model, confidentiality, exceptions</div>
+
+  <div class="card">
+    <div class="card-title">4 Theoretical Justifications for Truth-Telling ⭐</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Theory</th><th>Core Idea</th><th>Key Point</th></tr>
+        <tr><td><strong>Deontology (Kant)</strong></td><td>Categorical Duty</td><td>Lying is <em>always</em> morally wrong regardless of consequences; patient has the right to know</td></tr>
+        <tr><td><strong>Consequentialism (Mill)</strong></td><td>Outcome-based</td><td>Truth builds trust and leads to better outcomes; deception undermines trust and worsens outcomes</td></tr>
+        <tr><td><strong>Virtue Ethics (Pellegrino & Thomasma)</strong></td><td>Character-based</td><td>A virtuous physician embodies honesty, integrity, fidelity; a physician who lies is not virtuous</td></tr>
+        <tr><td><strong>Care Ethics (O'Neill)</strong></td><td>Context-sensitive, relational</td><td>Truth-telling is not a blunt instrument; must be tailored to patient's situation, values, culture; being "compassionately honest"</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">SPIKES Model for Breaking Bad News ⭐</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-num">S</div><div><strong>Setting</strong> — Quiet, private place; sit down; do not rush</div></div>
+      <div class="flow-step"><div class="flow-num">P</div><div><strong>Perception</strong> — Ask what the patient already knows</div></div>
+      <div class="flow-step"><div class="flow-num">I</div><div><strong>Invitation</strong> — Ask how much detail the patient wants</div></div>
+      <div class="flow-step"><div class="flow-num">K</div><div><strong>Knowledge</strong> — Share truth clearly and gently; plain language; check understanding</div></div>
+      <div class="flow-step"><div class="flow-num">E</div><div><strong>Emotion</strong> — Create space for patient emotions; respond with empathy</div></div>
+      <div class="flow-step"><div class="flow-num">S</div><div><strong>Strategy & Summary</strong> — Plan next steps with patient; provide support</div></div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Confidentiality — Grounded In</div>
+      <ul class="styled">
+        <li>Autonomy</li>
+        <li>Trust (patient may withhold info if trust is broken)</li>
+        <li>Privacy</li>
+        <li>Professional oath</li>
+      </ul>
+      <div class="highlight">Both truth-telling & confidentiality are <strong>prima facie duties</strong> — binding but NOT absolute</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Exceptions to Confidentiality ⭐</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Exception</th><th>Example</th></tr>
+          <tr><td><strong>Serious risk of harm to others</strong></td><td>Tarasoff case — duty to warn third party threatened by patient</td></tr>
+          <tr><td><strong>Public health reporting</strong></td><td>TB, HIV (RA 11166 in PH)</td></tr>
+          <tr><td><strong>Legal mandates</strong></td><td>Child abuse, subpoenas</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Truth-Telling Case Algorithm ⭐</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-num">1</div><div>Assess patient's prior expressed wishes (e.g., clinic notes, advance directive)</div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div>Check social media/information environment — could patient discover on own?</div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div>Consider patient's "right not to know" — some patients prefer not to be told; respect this as autonomy</div></div>
+      <div class="flow-step"><div class="flow-num">4</div><div>Use SPIKES model for delivery — ensure family support is present</div></div>
+      <div class="flow-step"><div class="flow-num">5</div><div>If patient prefers not to know: document, and encourage revisiting; involve family with patient's permission</div></div>
+    </div>
+    <div class="highlight">⭐ Truth must <em>eventually</em> be disclosed in a way that honors autonomy while ensuring support</div>
+  </div>
+</div>
+
+<!-- ═══════════════ 1.07 ═══════════════ -->
+<div id="s7" class="section">
+  <div class="section-title">1.07 Decision Making for Adults</div>
+  <div class="section-subtitle">Autonomy, surrogate decision-making, advance directives, competence</div>
+
+  <div class="card">
+    <div class="card-title">Surrogate Decision-Making Algorithm ⭐</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-num">1</div><div>Is the patient competent to make decisions? → If YES → respect their autonomous decision</div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div>If NO → Is there an <strong>advance directive</strong>? → If YES → follow it</div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div>If NO advance directive → Is there a <strong>surrogate</strong>? → Use surrogate hierarchy</div></div>
+      <div class="flow-step"><div class="flow-num">4</div><div>Does surrogate <strong>know patient's preferences</strong>? → If YES → <strong>Substituted Judgment</strong> ("What would patient have chosen?")</div></div>
+      <div class="flow-step"><div class="flow-num">5</div><div>Preferences UNKNOWN → <strong>Best Interest Standard</strong> (maximize benefit, minimize harm)</div></div>
+      <div class="flow-step"><div class="flow-num">6</div><div>No surrogate (unbefriended) → <strong>Attending physician</strong> acts as surrogate</div></div>
+    </div>
+
+    <div class="info-box" style="margin-top:0.7rem;">
+      <strong>Surrogate Hierarchy:</strong> Spouse → Adult children → Parents → Siblings → Attending physician (unbefriended)
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Substituted Judgment vs Best Interest</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th></th><th>Substituted Judgment</th><th>Best Interest</th></tr>
+          <tr><td><strong>When</strong></td><td>Preferences KNOWN</td><td>Preferences UNKNOWN</td></tr>
+          <tr><td><strong>Question</strong></td><td>"What would the patient have chosen?"</td><td>"What is best for the patient?"</td></tr>
+          <tr><td><strong>Basis</strong></td><td>Patient's prior values, wishes</td><td>Maximize benefit, minimize harm; quality of life, dignity</td></tr>
+          <tr><td><strong>Ethical principle</strong></td><td>Respects autonomy</td><td>Beneficence + non-maleficence</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Advance Directives</div>
+      <ul class="styled">
+        <li>Written instructions expressing patient desires for end-of-life care</li>
+        <li>Based on <strong>precedent autonomy</strong></li>
+        <li>Becomes active when patient <em>loses decision-making capacity</em></li>
+        <li>Written and signed; no notarization required (PH context)</li>
+        <li>Releases emotional burden from potential surrogates</li>
+      </ul>
+      <div class="highlight">Must be validated before honoring (e.g., case of patient with living will in ER)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Competence Assessment ⭐</div>
+    <div class="grid-2">
+      <div>
+        <div class="info-box">
+          <strong>Patient is competent if they can:</strong><br>
+          1. Understand the procedure/treatment<br>
+          2. Weigh risks and benefits<br>
+          3. Make and communicate a decision based on understanding
+        </div>
+        <ul class="styled" style="margin-top:0.5rem;">
+          <li>Task-specific and variable over time</li>
+          <li>Generally assumed competent unless doubts arise</li>
+          <li>Formal assessment required if patient actively refuses</li>
+        </ul>
+      </div>
+      <div>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Threshold</th><th>Risk</th></tr>
+            <tr><td>High threshold</td><td>Wrongly labels competent patients as incompetent</td></tr>
+            <tr><td>Low threshold</td><td>Allows incompetent decisions</td></tr>
+            <tr><td>Sliding scale</td><td>Adjusts by seriousness — but risks paternalism</td></tr>
+          </table>
+        </div>
+        <div class="alert-box" style="margin-top:0.5rem;font-size:0.83rem;"><strong>Baerøe's solution:</strong> Collective deliberation — include healthcare workers, surrogates, and patient advocates</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Autonomy Challenges to Consent (Elliott)</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Challenge</th><th>Description</th></tr>
+        <tr><td><strong>Lack of competence</strong></td><td>Surrogate required</td></tr>
+        <tr><td><strong>Competent but "irrational"</strong></td><td>Poor decisions when depressed; still must be respected unless truly incompetent</td></tr>
+        <tr><td><strong>Problematic identity</strong></td><td>Neurological damage, dementia — who is the "real" person deciding?</td></tr>
+        <tr><td><strong>Moral imagination</strong></td><td>Difficulty imagining future states (e.g., disability) when making advance decisions</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 3.01 ═══════════════ -->
+<div id="s8" class="section">
+  <div class="section-title">3.01 Commodification: Organ/Tissue Sale & Transplant Tourism</div>
+  <div class="section-subtitle">Commodification, instrumentalization, organ allocation, living donors</div>
+
+  <div class="card">
+    <div class="card-title">Commodification — 3 Essential Characteristics ⭐</div>
+    <div class="grid-3">
+      <div class="info-box"><strong>1. Has a price</strong><br>Every commodity can be bought and sold</div>
+      <div class="info-box"><strong>2. Fungible</strong><br>Interchangeable with others of like type and quality</div>
+      <div class="info-box"><strong>3. Instrumental value</strong><br>Valuable only as a means to another end; not intrinsically valuable</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Descriptive vs Normative Commodification</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Descriptive</th><th>Normative</th></tr>
+          <tr><td>Social practice where things are bought and sold</td><td>Moral disapproval; the wrong of commodification</td></tr>
+          <tr><td>Observation, not judgment</td><td>Argues it is wrong to treat certain things as commodities</td></tr>
+          <tr><td>Ex: Organ sales exist in some countries</td><td>Ex: Organ sales are wrong because they commodify the human body</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Proper vs Wrongful Commodities</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Proper Commodities</th><th>Wrongful Commodities</th></tr>
+          <tr><td>Truly fungible and only instrumentally valuable</td><td>Treated as commodities despite NOT being truly fungible</td></tr>
+          <tr><td>Nothing wrong with treating them as interchangeable</td><td>Violates inherent value and dignity</td></tr>
+          <tr><td>Ex: A peso is essentially the same as another peso</td><td>Ex: Human organs; persons</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Instrumentalization (Kant) ⭐</div>
+    <div class="grid-2">
+      <div>
+        <ul class="styled">
+          <li>Treating a person as a <strong>means to an end</strong>, not an end in itself</li>
+          <li><strong>Displacement Thesis</strong>: Use perspective displaces personhood perspective → undermines status as persons</li>
+          <li>Selling body parts reduces person to a commodity; disregards inherent value</li>
+          <li>Commodification <strong>requires</strong> instrumentalization</li>
+          <li>Instrumentalization occurs when person is used <strong>without valid consent</strong></li>
+        </ul>
+      </div>
+      <div>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Use Perspective</th><th>Personhood Perspective</th></tr>
+            <tr><td>View people as tools or means to an end</td><td>View people's worth and dignity</td></tr>
+          </table>
+        </div>
+        <div class="highlight" style="margin-top:0.5rem;">
+          <strong>Kantian Principle of Respect:</strong> Patients must be seen for their inherent value in themselves, not as means to medical/scientific ends
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Fungibility (Wilkinson) ⭐</div>
+    <div class="grid-2">
+      <div>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Marshall (1999)</th><th>Wilkinson (2007)</th></tr>
+            <tr><td>Fungibility is morally unproblematic in specific contexts</td><td>In certain contexts we OUGHT to treat people as non-fungible</td></tr>
+            <tr><td>A well-trained waiter is just as good as another</td><td>A genuine friendship values the specific friend, not anyone similar</td></tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Sale of Body Parts</th><th>Reproductive Ethics</th></tr>
+            <tr><td>Impersonal relationship → fungibility less relevant</td><td>Personal relationship → fungibility more relevant</td></tr>
+            <tr><td>Vendors & Customers</td><td>Parent & Children</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Organ Allocation — 3 Principles ⭐</div>
+    <div class="grid-3">
+      <div class="success-box"><strong>Utility</strong><br>Most benefit to recipient</div>
+      <div class="info-box"><strong>Urgency</strong><br>Sickest patients first</div>
+      <div class="highlight"><strong>Equity</strong><br>Longest waiting time</div>
+    </div>
+    <div class="alert-box" style="margin-top:0.5rem;">
+      ⭐ <strong>Classic conflict:</strong> Patient A (waiting longest, lower survival benefit) vs Patient B (newly listed, higher survival benefit) → <strong>Utility vs Equity</strong>
+    </div>
+    <ul class="styled" style="margin-top:0.5rem;">
+      <li>Restricted from discrimination based on social worth, sex, religion, race</li>
+      <li>"Time on list" is transparent but ignores socioeconomic barriers to listing</li>
+    </ul>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Organ Retrieval — Double Veto System ⭐</div>
+      <div class="flow">
+        <div class="flow-step"><div class="flow-num">1</div><div><strong>Deceased Veto:</strong> If person refused while alive → NO retrieval</div></div>
+        <div class="flow-step"><div class="flow-num">2</div><div><strong>Family Veto:</strong> Even if deceased consented → family can veto → NO retrieval</div></div>
+        <div class="flow-step"><div class="flow-num">3</div><div><strong>Default:</strong> No expressed wishes → family permission usually sufficient</div></div>
+      </div>
+      <div class="highlight" style="margin-top:0.5rem;">Only ~1% of deaths are suitable for organ donation</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Reform Proposals (with Issues)</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Reform</th><th>Issue</th></tr>
+          <tr><td>Mandated choice</td><td>When pressured, people default to "no"</td></tr>
+          <tr><td>End family veto</td><td>Fear of public backlash; urban myths</td></tr>
+          <tr><td>Presumed consent (opt-out)</td><td>May take organs from those who didn't want to donate</td></tr>
+          <tr><td>Conscription</td><td>Politically unpopular; distressing to families</td></tr>
+          <tr><td>Payment for organs</td><td>Undermines voluntariness; exploitation of poor</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Living Donors — Valid Consent Issues ⭐</div>
+    <div class="grid-2">
+      <div>
+        <div class="info-box">
+          <strong>Valid consent must be:</strong> Voluntary + Informed + Competent<br><br>
+          Competence is questionable if donor is:
+          <ol style="padding-left:1rem;margin-top:0.3rem;font-size:0.88rem;">
+            <li>Desperate to save a relative</li>
+            <li>Subject to moral responsibility</li>
+            <li>Subject to family pressure</li>
+          </ol>
+        </div>
+      </div>
+      <div>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Issue</th><th>Valid?</th></tr>
+            <tr><td>"Sense of duty"</td><td><span class="tag tag-green">VALID motivation</span></td></tr>
+            <tr><td>Coercion/ostracism by family</td><td><span class="tag tag-red">INVALIDATES consent</span></td></tr>
+          </table>
+        </div>
+        <div class="alert-box" style="margin-top:0.5rem;font-size:0.85rem;">Psychosocial screening looks for: excessive sense of duty, undue influence, unconscious neurotic influences, abnormal emotional involvement</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Self-Inflicted Illness & Allocation — Arguments</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Argument</th><th>Claim</th><th>Rebuttal</th></tr>
+        <tr><td><strong>Medical Argument</strong></td><td>Deprioritize risk-takers because they may have poorer outcomes</td><td>Factually untrue that a class would do so badly they get deprioritized</td></tr>
+        <tr><td><strong>Incentives/Punishment Argument</strong></td><td>Deny organs to smokers/drinkers to discourage behavior</td><td>Healthcare is not a tool for punishment; organ failure is already a massive incentive to be healthy</td></tr>
+        <tr><td><strong>Restoration Argument</strong></td><td>Risk-takers shouldn't harm non-risk-takers by consuming scarce resources</td><td>Irony: if smokers die younger and cost system less, logic would suggest higher priority</td></tr>
+      </table>
+    </div>
+    <div class="alert-box">All three arguments are generally <strong>rejected</strong> in ethical practice</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">State Paternalism vs Autonomy in Organ Donation ⭐</div>
+    <div class="grid-2">
+      <div class="info-box">
+        <strong>State Paternalism:</strong><br>
+        Restriction of individual freedom justified by claim of safety.<br>
+        State says NO to donation of organs essential to life (e.g., heart, second kidney)
+      </div>
+      <div class="highlight">
+        <strong>Moral Force of Consent Debate:</strong><br>
+        Can a parent consent to donating their heart (causing their own death) to save a child?<br>
+        → Autonomy vs. state paternalism<br>
+        → Risk: consent in extreme cases is never truly voluntary
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MCQ ═══════════════ -->
+<div id="mcq" class="section">
+  <div class="section-title">📝 MCQ Practice — 30 Questions</div>
+  <div class="section-subtitle">Click an answer to see if you're correct. Score tracked below.</div>
+
+  <div class="score-box" id="score-display">Score: 0 / 0 answered</div>
+
+  <div id="mcq-container"></div>
+</div>
+
+<!-- ═══════════════ BUZZWORDS ═══════════════ -->
+<div id="buzz" class="section">
+  <div class="section-title">🔑 Buzzwords & Quick Recall Summary</div>
+  <div class="section-subtitle">High-yield terms and their one-liner definitions</div>
+
+  <div class="card">
+    <div class="card-title">Classic Exam Triggers</div>
+    <div class="buzz-grid" id="buzz-grid"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔗 If you see this… Think this!</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clinical Scenario Trigger</th><th>Ethical Concept</th></tr>
+        <tr><td>Patient signs consent form but doesn't understand</td><td>Effective consent (NOT autonomous consent)</td></tr>
+        <tr><td>Family insists on life support despite no meaningful recovery</td><td>Beneficence vs Non-maleficence conflict</td></tr>
+        <tr><td>Donor pressured by family to give kidney</td><td>Voluntariness compromised → invalid consent</td></tr>
+        <tr><td>Doctor withholds diagnosis to spare patient distress</td><td>Therapeutic privilege / Paternalism</td></tr>
+        <tr><td>Longest-waiting patient vs highest-benefit patient for organ</td><td>Equity vs Utility conflict</td></tr>
+        <tr><td>Buying organ from poor person who agreed</td><td>Commodification + financial inducement undermining voluntariness</td></tr>
+        <tr><td>Parent wants to donate heart to child</td><td>State paternalism vs autonomy; moral force of consent</td></tr>
+        <tr><td>HIV patient refuses to tell pregnant partner</td><td>Confidentiality exception (serious harm to others); counsel first</td></tr>
+        <tr><td>"What would a good doctor do?"</td><td>Virtue ethics</td></tr>
+        <tr><td>Greatest good for greatest number</td><td>Utilitarianism / Consequentialism</td></tr>
+        <tr><td>Respecting patient refusal regardless of outcome</td><td>Deontology (duty-based)</td></tr>
+        <tr><td>Prior cases guide the decision</td><td>Casuistry</td></tr>
+        <tr><td>Patient from Asian culture; family makes medical decisions</td><td>Relational/Familial autonomy</td></tr>
+        <tr><td>Researcher uses specimen without telling patient</td><td>Violation of specific consent / autonomy</td></tr>
+        <tr><td>Research presumed consent rejected</td><td>Failure to object ≠ genuine consent → undermines autonomy</td></tr>
+        <tr><td>Organs taken if patient didn't formally object</td><td>Presumed consent / opt-out system</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">High-Yield People to Know</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Person</th><th>Known For</th></tr>
+        <tr><td><strong>Beauchamp & Childress</strong></td><td>4 principles of bioethics (Autonomy, Beneficence, Non-maleficence, Justice)</td></tr>
+        <tr><td><strong>Immanuel Kant</strong></td><td>Categorical imperative; treat people as ends, never merely as means</td></tr>
+        <tr><td><strong>Jeremy Bentham</strong></td><td>Act utilitarianism; principle of utility; pleasure vs pain</td></tr>
+        <tr><td><strong>John Stuart Mill</strong></td><td>Rule utilitarianism; Greatest Happiness Principle; quality of pleasure</td></tr>
+        <tr><td><strong>Aristotle</strong></td><td>Virtue ethics; Eudaimonia; Doctrine of the Mean</td></tr>
+        <tr><td><strong>Carol Gilligan</strong></td><td>Ethics of care (feminist)</td></tr>
+        <tr><td><strong>Rebecca Kukla</strong></td><td>Conscientious autonomy</td></tr>
+        <tr><td><strong>Mackenzie</strong></td><td>4 types of autonomy; relational autonomy</td></tr>
+        <tr><td><strong>Wilkinson (S)</strong></td><td>Commodification; fungibility; instrumentalization</td></tr>
+        <tr><td><strong>Baerøe</strong></td><td>Framework for collective deliberation in surrogate decision-making</td></tr>
+        <tr><td><strong>Sir Francis Galton</strong></td><td>Coined "Eugenics" (1883)</td></tr>
+        <tr><td><strong>Hippocrates</strong></td><td>Father of Medicine; "Do No Harm"; Hippocratic Corpus</td></tr>
+        <tr><td><strong>Herophilus</strong></td><td>Father of Anatomy; human cadaver dissection</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ── NAV ──
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateProgress();
+}
+
+// ── PROGRESS ──
+function updateProgress() {
+  const sections = ['s0','s1','s2','s3','s4','s5','s6','s7','s8','mcq','buzz'];
+  const active = document.querySelector('.section.active').id;
+  const idx = sections.indexOf(active);
+  const pct = ((idx + 1) / sections.length) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+// ── MCQ DATA ──
+const mcqs = [
+  {
+    q: "A patient refuses life-saving treatment citing personal beliefs. The physician respects this despite disagreeing. Which ethical theory BEST supports the physician's action?",
+    opts: ["Consequentialism", "Virtue ethics", "Deontology", "Utilitarianism"],
+    ans: 2,
+    exp: "Deontology (Kant) holds that respecting a patient's right to refuse treatment is a moral duty, regardless of the outcome. The physician's duty is to respect autonomy."
+  },
+  {
+    q: "A hospital allocates the last ICU bed to a 30-year-old over a 75-year-old to save more life-years. Which ethical theory BEST supports this decision?",
+    opts: ["Deontology", "Consequentialism", "Virtue ethics", "Casuistry"],
+    ans: 1,
+    exp: "Consequentialism (Utilitarianism) justifies actions based on outcomes. Giving the bed to the 30-year-old maximizes life-years saved — the greatest good for the greatest number."
+  },
+  {
+    q: "Presumed consent for organ donation was REJECTED in the Human Tissue Act of 2004 primarily because:",
+    opts: ["It reduces organ availability", "It conflicts with non-maleficence", "Failure to object does not constitute genuine autonomous consent", "It prevents family participation"],
+    ans: 2,
+    exp: "The prevailing view is that the substance of consent (clear, informed decision) is more important than its form. Failure to object ≠ genuine consent and may imply state appropriation of tissue."
+  },
+  {
+    q: "A surrogate is making decisions for an incapacitated patient whose wishes ARE known from prior conversations. Which standard should be used?",
+    opts: ["Best interest standard", "Substituted judgment", "Physician recommendation", "Shared decision-making"],
+    ans: 1,
+    exp: "Substituted judgment is used when the patient's preferences ARE known. The surrogate asks: 'What would the patient have chosen?' This respects patient autonomy even in incapacity."
+  },
+  {
+    q: "A low-income patient agrees to sell a kidney after financial pressure. He initially refused but accepted due to desperation. Which BEST describes the ethical issue?",
+    opts: ["Autonomy is fully preserved since he agreed", "Fungibility is acceptable in all healthcare relationships", "Commodification requires instrumentalization and may undermine voluntariness", "Valid consent is achieved because the patient agreed"],
+    ans: 2,
+    exp: "Financial inducements can undermine voluntariness, making consent not truly valid. This reflects commodification requiring instrumentalization — the person is treated as a means for financial gain."
+  },
+  {
+    q: "Patient A has been waiting the longest for a liver transplant but has lower predicted survival benefit. Patient B was newly listed but has significantly higher predicted benefit. The conflict is BEST described as:",
+    opts: ["Autonomy vs Non-maleficence", "Utility vs Equity", "Beneficence vs Consent", "Justice vs Autonomy"],
+    ans: 1,
+    exp: "Organ allocation is guided by Utility (most benefit), Urgency (sickest first), and Equity (longest waiting time). This scenario illustrates the classic Utility vs Equity conflict."
+  },
+  {
+    q: "An HIV patient refuses to tell his pregnant partner and refuses to use protection. The MOST ethical first step is:",
+    opts: ["Immediately disclose to the partner to prevent harm", "Report to DOH and disclose", "Strongly counsel the patient to disclose himself; only disclose if refusal persists", "Maintain confidentiality absolutely"],
+    ans: 2,
+    exp: "Confidentiality has exceptions when there is serious risk of harm to others. However, the correct approach is to first counsel the patient to disclose himself, as physicians in the Philippines cannot disclose without due process (RA 11166)."
+  },
+  {
+    q: "A researcher modifies removed human tissue through 'work and skill' (e.g., preservation). The tissue may become institutional property. This creates tension between:",
+    opts: ["Informed consent and non-maleficence", "Donor interests and institutional control", "Beneficence and justice", "Autonomy and state paternalism"],
+    ans: 1,
+    exp: "The 'Work and Skill' doctrine allows tissue that has been modified to become property, potentially leading to commercialization. This directly creates tension between donor interests and institutional control."
+  },
+  {
+    q: "A biotechnology company offers large monetary compensation for bone marrow donation. Participants are fully informed and voluntarily sign consent. An ethics committee member argues payment makes this inherently immoral. Based on Wilkinson's view, the MOST appropriate analysis is:",
+    opts: ["Payment automatically invalidates consent", "The transaction is acceptable if valid consent is present and participants are not treated merely as means", "Any payment involving body parts is inherently unethical", "Human tissues can never be treated as commodities"],
+    ans: 1,
+    exp: "Commodification requires instrumentalization, and instrumentalization depends on the ABSENCE of valid consent. If consent is informed, competent, and voluntary, the person is not being treated merely as a means."
+  },
+  {
+    q: "A potential living donor states a strong 'sense of duty' to save their sibling. Which finding would MOST likely INVALIDATE the voluntariness of consent?",
+    opts: ["The donor acknowledges deep moral responsibility to help", "The donor experiences 'closeness' that clouds long-term risk judgment", "The donor perceives a threat of social ostracism if they refuse", "The donor is making a decision in a desperate moment similar to life-saving operations"],
+    ans: 2,
+    exp: "Psychosocial screening distinguishes between a valid 'sense of duty' and 'coercion/ostracism.' A perceived threat of social ostracism crosses into coercion, invalidating voluntary consent."
+  },
+  {
+    q: "A 45-year-old declared brain dead had previously signed a donor registry. The spouse and children strongly object to retrieval citing cultural beliefs. In a 'double veto' system, the clinical action is:",
+    opts: ["Proceed — deceased prior consent is legally binding", "Abort retrieval — family objection constitutes a valid veto", "Consult legal mediator about inheritable property", "Proceed only if death was circulatory, not brain death"],
+    ans: 1,
+    exp: "In a double veto system, retrieval is disallowed if either the deceased refused while alive OR the family objects after death. The family's objection here constitutes a valid veto."
+  },
+  {
+    q: "The state prohibits a parent from donating their heart to their dying child even with explicit informed consent. This restriction is an example of:",
+    opts: ["Autonomy", "State Paternalism", "Psychosocial Screening", "Competent Judgment"],
+    ans: 1,
+    exp: "State paternalism is the restriction of individual freedom justified by concern for the person's safety. Donating a heart would cause the donor's death — the state sets limits on how much harm a person can consent to."
+  },
+  {
+    q: "Which 'Restoration Argument' tenet suggests why risk-takers should have reduced organ allocation entitlement?",
+    opts: ["To punish bad lifestyle choices as a deterrent", "Because risk-takers impose unfair burdens on non-risk-takers competing for the same scarce organs", "Because risk-takers have poorer clinical outcomes", "To maximize overall life-years gained"],
+    ans: 1,
+    exp: "The Restoration Argument holds that risk-takers voluntarily choose unhealthy lifestyles, increasing their demand on scarce organs, thereby reducing non-risk-takers' chances of receiving them — which is unfair."
+  },
+  {
+    q: "A nurse cares empathetically for an unresponsive patient, focusing on the relationship rather than rules. This BEST illustrates:",
+    opts: ["Deontology", "Casuistry", "Ethics of Care", "Consequentialism"],
+    ans: 2,
+    exp: "Ethics of Care (Carol Gilligan) emphasizes relationships, emotional responsiveness, and nurturing over abstract principles. It is especially prevalent in nursing ethics."
+  },
+  {
+    q: "Baerøe's framework for non-competent patients proposes which PRIMARY mechanism to reduce arbitrary surrogate decisions?",
+    opts: ["Rely solely on the attending physician's judgment", "Transfer all decisions to the hospital's legal department", "Implement collective deliberation including healthcare workers, surrogates, and patient advocates", "Require family to make all decisions without medical input"],
+    ans: 2,
+    exp: "Baerøe advocates for a framework of reasonableness through collective deliberation, minimizing arbitrary and paternalistic decisions while ensuring respect and fairness for vulnerable patients."
+  },
+  {
+    q: "A patient comes to a clinic, is examined by a doctor, and receives a prescription without being explicitly asked for permission. This is an example of:",
+    opts: ["Tacit consent", "Explicit consent", "Implied consent", "Presumed consent"],
+    ans: 2,
+    exp: "Implied consent indicates a willingness to undergo a procedure regardless of written or oral consent, NOT coerced by anyone. Coming to a clinic and not objecting to examination implies consent."
+  },
+  {
+    q: "Which document directly resulted from the Tuskegee Syphilis Study and established the foundational principles of Respect for Persons, Beneficence, and Justice?",
+    opts: ["Nuremberg Code", "Declaration of Helsinki", "Belmont Report", "Geneva Declaration"],
+    ans: 2,
+    exp: "The Belmont Report (1979) arose directly from ethical lapses in U.S. research, most notably the Tuskegee Syphilis Study. It established three core principles and formed the basis for IRBs and the Common Rule."
+  },
+  {
+    q: "Which fallacy involves attacking the person making an argument rather than addressing the argument itself?",
+    opts: ["Begging the question", "Ad hominem", "Reductio ad absurdum", "Non sequitur"],
+    ans: 1,
+    exp: "Ad hominem attacks the person rather than their argument — e.g., calling someone a 'baby-killer' instead of addressing their reasoning about abortion."
+  },
+  {
+    q: "An Asian patient's family requests the physician withhold the cancer diagnosis to protect the patient. The physician agrees and discusses the case with the family only. This PRIMARILY illustrates:",
+    opts: ["Western autonomy model — patient has right to information", "Asian autonomy model — familial autonomy over individual autonomy", "Deontological duty — physicians must disclose", "Utilitarianism — maximizing overall family happiness"],
+    ans: 1,
+    exp: "The Asian model prioritizes familial autonomy over individual autonomy. The family unit makes decisions, and the physician's action reflects family-centered decision-making rooted in beneficent intentions to spare the patient distress."
+  },
+  {
+    q: "According to Kant's Categorical Imperative, which principle is MOST directly violated by selling organs for financial gain?",
+    opts: ["The act cannot be universalized by all", "The seller is treated as a means rather than an end", "The act violates the greatest happiness principle", "The act is not freely chosen"],
+    ans: 1,
+    exp: "Kant's principle: treat humanity always as an end and never merely as a means. Organ selling reduces a person to a commodity — a means for financial gain or procurement — disregarding their inherent worth."
+  },
+  {
+    q: "A 68-year-old patient with Alzheimer's can no longer communicate or understand medical decisions. The principle MOST directly challenged is:",
+    opts: ["Beneficence", "Autonomy", "Justice", "Fidelity"],
+    ans: 1,
+    exp: "Autonomy refers to a patient's right to self-determination and making decisions aligned with their values. Loss of decision-making capacity directly challenges this principle, necessitating surrogate decision-making."
+  },
+  {
+    q: "The Tarasoff case established which exception to patient confidentiality?",
+    opts: ["Public health reporting for infectious disease", "Duty to warn third parties threatened by a patient", "Legal mandates such as child abuse reporting", "Disclosure to the patient's family upon request"],
+    ans: 1,
+    exp: "The Tarasoff case established that healthcare providers have a duty to warn or protect identifiable third parties when a patient presents a serious risk of harm to them — even breaching confidentiality."
+  },
+  {
+    q: "In which situation should the attending physician act as the surrogate decision-maker?",
+    opts: ["When family members disagree about treatment", "When the patient is unbefriended with no surrogate and no advance directive", "When the patient has an advance directive that the family opposes", "When the patient has a terminal illness with poor prognosis"],
+    ans: 1,
+    exp: "In cases where a patient is unbefriended (no family, no surrogate, no advance directive), the attending physician can act as a surrogate to make necessary medical decisions, especially in emergency situations."
+  },
+  {
+    q: "Which type of autonomy emphasizes ongoing responsiveness, engagement with others, and accountability over time — rather than just momentary decision-making?",
+    opts: ["Decisional autonomy", "Conscientious autonomy", "Libertarian autonomy", "Relational autonomy"],
+    ans: 1,
+    exp: "Conscientious autonomy (Rebecca Kukla) emphasizes living in accordance with one's values and commitments over time. It rejects the view that autonomy = momentary rational choice, focusing on long-term moral agency."
+  },
+  {
+    q: "A hospital assigns kidney transplants based strictly on medical urgency regardless of social status. A wealthy patient argues organs should be treated like market commodities. The ethical concern from Wilkinson's framework MOST directly violated is:",
+    opts: ["Instrumentalization — patient is being used for hospital profit", "Fungibility — organs are treated as interchangeable goods based on payment", "Justice — allocation should not depend on financial ability", "Autonomy — patient is denied right to purchase an organ"],
+    ans: 2,
+    exp: "Wilkinson emphasizes organs should not be bought or sold to preserve fairness in allocation. Allowing payment-based priority treats organs as fungible market commodities, undermining equitable distribution. Justice is the principle violated."
+  },
+  {
+    q: "Which of the following is NOT a justification for truth-telling in medicine?",
+    opts: ["Deontology — lying is always morally wrong", "Consequentialism — truth builds trust", "SPIKES model — structured framework for disclosure", "Virtue ethics — honest physician embodies good character"],
+    ans: 2,
+    exp: "The SPIKES model is a practical tool (protocol) for breaking bad news, NOT a theoretical justification for truth-telling. The four theoretical justifications are: Deontology, Consequentialism, Virtue Ethics, and Care Ethics."
+  },
+  {
+    q: "The Nazi T4 Euthanasia Program targeted which population?",
+    opts: ["Jewish prisoners of war", "Institutionalized mentally ill and physically impaired deemed 'unworthy of life'", "Political opponents of the Nazi regime", "African prisoners in concentration camps"],
+    ans: 1,
+    exp: "The T4 program involved the systematic killing of those deemed 'unworthy of life' — specifically the institutionalized mentally ill and physically impaired. This was part of the broader eugenics agenda."
+  },
+  {
+    q: "An 80-year-old competent ICU patient on mechanical ventilation writes that she wishes to be extubated. Her daughter (with financial power of attorney) demands continued life support. The MOST appropriate action is:",
+    opts: ["Delay extubation until daughter arrives to avoid conflict", "Proceed with extubation respecting the competent patient's wishes", "Re-intubate immediately to prevent conflict", "Follow daughter's request as next of kin"],
+    ans: 1,
+    exp: "When a patient is lucid and competent, their autonomy and wishes take priority over those of family members — even if the family member holds financial (not personal care) power of attorney. The patient's clear, written, consistent request must be honored."
+  },
+  {
+    q: "Priority to children for deceased donor kidneys to maximize 'life years gained' has an unintended paradox. This paradox is:",
+    opts: ["Children have worse surgical outcomes than adults", "Parents are less likely to become living donors when their child has priority for deceased donor kidneys", "Adult patients on the waitlist lose faith in the allocation system", "Children often require re-transplantation due to graft failure"],
+    ans: 1,
+    exp: "Studies (Axelrod et al. 2010) show that when parents know their child will quickly receive a deceased kidney due to priority rules, they are LESS likely to undergo the risk of being a living donor — paradoxically reducing the overall organ supply."
+  },
+  {
+    q: "Which of the following BEST illustrates Mackenzie's critique of Libertarian autonomy?",
+    opts: ["It fails to consider long-term moral commitments", "It ignores how structural inequality and power differentials can make 'free choices' coerced", "It is too dependent on social context", "It assumes people are not rational decision-makers"],
+    ans: 1,
+    exp: "Mackenzie criticizes Libertarian autonomy for ignoring structural inequality and assuming that more choices automatically equal more freedom. It doesn't ask whether choices are authentic or coerced by circumstance — e.g., a poor person 'choosing' to sell an organ."
+  },
+  {
+    q: "In Kant's ethical framework, using a patient as a subject in research without valid consent is wrong because:",
+    opts: ["It produces negative consequences for overall happiness", "It fails to follow established research protocols", "It treats the person as a means only, not as an end in themselves", "It violates the principle of beneficence"],
+    ans: 2,
+    exp: "Kant's Categorical Imperative requires treating humanity always as an end and never merely as a means. Conducting research without valid consent instrumentalizes the person — using them as a tool for scientific gain rather than respecting their inherent worth."
+  }
+];
+
+// Build MCQ
+let score = 0, answered = 0;
+function buildMCQ() {
+  const container = document.getElementById('mcq-container');
+  mcqs.forEach((q, qi) => {
+    const div = document.createElement('div');
+    div.className = 'mcq-item';
+    div.innerHTML = `
+      <div class="mcq-q"><span class="mcq-num">Q${qi+1}</span>${q.q}</div>
+      <ul class="mcq-options" id="opts-${qi}">
+        ${q.opts.map((o,i) => `<li data-qi="${qi}" data-i="${i}" onclick="answer(${qi},${i},this)">${String.fromCharCode(65+i)}. ${o}</li>`).join('')}
+      </ul>
+      <div class="mcq-explain" id="exp-${qi}">💡 <strong>Explanation:</strong> ${q.exp}</div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function answer(qi, chosen, el) {
+  const ul = document.getElementById('opts-' + qi);
+  if (ul.dataset.done) return;
+  ul.dataset.done = '1';
+  answered++;
+  const correct = mcqs[qi].ans;
+  Array.from(ul.children).forEach((li, i) => {
+    li.style.pointerEvents = 'none';
+    if (i === correct) li.classList.add('reveal-correct');
+    if (i === chosen && chosen !== correct) li.classList.add('wrong');
+    if (i === chosen && chosen === correct) { li.classList.add('correct'); score++; }
+  });
+  document.getElementById('exp-' + qi).classList.add('show');
+  document.getElementById('score-display').textContent = `Score: ${score} / ${answered} answered (${Math.round(score/answered*100)}%)`;
+}
+
+buildMCQ();
+
+// ── BUZZWORDS ──
+const buzzwords = [
+  {term:'Eudaimonia', def:'Human flourishing; highest goal of human life (Aristotle)'},
+  {term:'Categorical Imperative', def:'Kant\'s supreme principle: act only on universalizable maxims; treat humans as ends'},
+  {term:'Prima facie duties', def:'Duties binding but NOT absolute — can be overridden by stronger conflicting duties'},
+  {term:'Displacement Thesis', def:'Use perspective displaces personhood perspective → undermines treating people as ends'},
+  {term:'Fungibility', def:'Interchangeability of items; treating non-fungible persons as interchangeable = moral wrong'},
+  {term:'Instrumentalization', def:'Treating person as means to an end rather than end in itself; commodification requires this'},
+  {term:'Substituted Judgment', def:'Surrogate decides based on known patient preferences ("What would they choose?")'},
+  {term:'Best Interest Standard', def:'Surrogate decides when preferences unknown; maximizes benefit, minimizes harm'},
+  {term:'Advance Directive', def:'Written instructions for care if incapacitated; based on precedent autonomy'},
+  {term:'Double Veto', def:'Both deceased veto AND family veto can block organ retrieval'},
+  {term:'Therapeutic Privilege', def:'Withholding diagnosis to spare patient distress (paternalistic; generally rejected)'},
+  {term:'Autonomously Authorized Consent', def:'Fully deliberate, informed, voluntary decision by a competent individual'},
+  {term:'Effective Consent', def:'Legally valid but may lack true understanding or voluntariness (just signed a form)'},
+  {term:'Tarasoff Case', def:'Established duty to warn third parties threatened by a patient'},
+  {term:'Competence', def:'Task-specific ability to understand, weigh, decide, and communicate a choice'},
+  {term:'Relational Autonomy', def:'Autonomy is socially embedded; shaped by relationships and cultural context (Mackenzie)'},
+  {term:'Conscientious Autonomy', def:'Long-term moral agency; living in alignment with values over time (Kukla)'},
+  {term:'Normative Commodification', def:'Moral disapproval — arguing something SHOULD NOT be treated as a commodity'},
+  {term:'Descriptive Commodification', def:'Observing that something IS bought and sold — no moral judgment implied'},
+  {term:'State Paternalism', def:'Restricting individual freedom to protect them from harm (e.g., banning heart donation)'},
+  {term:'SPIKES', def:'Breaking bad news: Setting, Perception, Invitation, Knowledge, Emotion, Strategy'},
+  {term:'Belmont Principles', def:'Respect for Persons + Beneficence + Justice (basis for IRBs, Common Rule)'},
+  {term:'Nuremberg Code', def:'10 principles for ethical research; #1: Voluntary consent is absolutely essential'},
+  {term:'Eugenics', def:'Sir Francis Galton (1883); "good birth"; belief human heredity is fixed; led to Nazi atrocities'},
+  {term:'Tuskegee Study', def:'40-year study denying African American men syphilis treatment; emblematic of racial discrimination'},
+  {term:'IRB', def:'Institutional Review Board; oversees research proposals for ethical compliance'},
+  {term:'Presupposed consent (opt-out)', def:'Organs taken unless deceased formally objects; controversial; not universally adopted'},
+  {term:'Restoration Argument', def:'Risk-takers should have reduced organ entitlement to protect non-risk-takers from unfair burden'},
+  {term:'Fact-Value Gap', def:'Cannot derive moral conclusion from purely factual premises; need at least one moral premise'},
+  {term:'Casuistry', def:'Case-based reasoning; compare to precedent cases; rules from empirical observation'},
+  {term:'Unbefriended patient', def:'No companion, no capacity, no advance directive → attending physician acts as surrogate'},
+  {term:'Work and Skill doctrine', def:'Tissue modified by work and skill may become property → tension between donor and institution'},
+];
+
+function buildBuzz() {
+  const grid = document.getElementById('buzz-grid');
+  buzzwords.forEach(b => {
+    const div = document.createElement('div');
+    div.className = 'buzz-item';
+    div.innerHTML = `<div class="buzz-term">${b.term}</div><div class="buzz-def">${b.def}</div>`;
+    grid.appendChild(div);
+  });
+}
+buildBuzz();
+updateProgress();
+</script>
+</body>
+</html>
